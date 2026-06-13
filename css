@@ -1,0 +1,2469 @@
+/* تغيير الخط العربي فقط على النصوص */
+html[lang="ar"], body[lang="ar"], *:lang(ar), p, span, h1, h2, h3, h4, h5, h6, a, li, label, input, textarea, select, div {
+    font-family: 'El Messiri', sans-serif !important;
+    font-weight: normal !important;  /* تأكد من أن الخط غير عريض */
+}
+
+/* استبعاد تأثير الخط على الرموز مثل Font Awesome */
+.fa, .icon, .arrow, i, svg, .emoji {
+    font-family: 'FontAwesome', sans-serif !important; /* إعادة تعيين الخط إلى الخط المخصص للأيقونات */
+    font-weight: normal !important;  /* إعادة تعيين الوزن ليكون طبيعي */
+}
+
+/* استبعاد تأثير الخط على الأزرار التي تحتوي على أيقونات */
+button, input[type="button"], input[type="submit"], .btn, .btn-* {
+    font-family: initial !important;
+    font-weight: normal !important;  /* إعادة تعيين الوزن ليكون طبيعي */
+}
+
+
+
+
+#login-btn-holder {
+  display: none;
+}
+
+#royal_login_container .royal_login_item {
+  background: url(https://cityupload.io/2025/11/6455693D-824F-46ED-973D-0A240610A22C.png) 100% 48% / 100% 500% no-repeat !important;
+  width: 15.5rem;
+  max-height: 3.2rem;
+  min-height: 3.2rem;
+}
+
+#royal_login_container .royal_login_item:before {
+  margin-top: -1rem;
+  width: 5.125rem;
+  height: 5.125rem;
+  background: none !important;
+}
+
+#royal_login_container .royal_login_item .royal_login_item__img {
+  width: 2rem;
+  height: 2rem;
+  top: 1rem;
+  left: 2.73rem;
+  border-radius: 50%;
+}
+
+#royal_login_container .royal_login_item .royal_login_item__name {
+  left: 6.5rem;
+  top: 1.85rem;
+}
+
+#royal_login_container .royal_login_item .username__wrapper {
+  background-color: #00000000 !important;
+}
+
+.chat_pane__user_item {
+  height: auto !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  position: relative !important;
+  margin: 0 !important;
+  background-color: #ffffff !important;
+  border-radius: 0.4rem !important;
+  overflow: visible !important;
+}
+
+.username__icon {
+  max-height: 16px !important;
+}
+
+.chat_pane__user_item__avatar {
+  --size: 64px;
+  position: relative !important;
+  width: var(--size) !important;
+  height: var(--size) !important;
+  min-width: var(--size) !important;
+  min-height: var(--size) !important;
+  max-width: var(--size) !important;
+  max-height: var(--size) !important;
+  border-radius: 50% !important;
+  overflow: visible !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  display: block !important;
+  aspect-ratio: 1 / 1 !important;
+  z-index: 5 !important;
+  transition: all 0.3s ease-in-out !important;
+}
+
+/* تحريك الصورة والإطار للأعضاء الذين لديهم إطار */
+.chat_pane__user_item__avatar.has-avatar-bg {
+  transform: translateX(10px) !important; /* ← يمكنك تعديل القيمة هنا */
+  transition: transform 0.3s ease-in-out !important;
+}
+
+.chat_pane__user_item__avatar img:not(.avatar_bg) {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 100% !important;
+  min-height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+  border-radius: 50% !important;
+  margin: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  transform: none !important;
+  z-index: 1 !important;
+}
+
+.chat_pane__user_item__avatar:not(:has(img.avatar_bg)) img {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  border-radius: 50% !important;
+  transform: scale(1) !important;
+  transform-origin: center center !important;
+  transition: all 0.3s ease-in-out !important;
+  z-index: 1 !important;
+}
+
+.chat_pane__user_item__avatar img.avatar_bg {
+  position: absolute !important;
+  width: 120% !important;
+  height: 120% !important;
+  top: -14.6% !important;
+  left: -21% !important;
+  object-fit: contain !important;
+  object-position: center center !important;
+  border-radius: 50% !important;
+  pointer-events: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  transform: none !important;
+  z-index: 3 !important;
+}
+
+.chat_pane__user_item:has(img.avatar_bg) {
+  padding-top: 0.4rem !important;
+  padding-bottom: 0.4rem !important;
+  background-color: #ffffff !important;
+  border-radius: 0.4rem !important;
+}
+
+.chat_pane__user_item__avatar:not(:has(img.avatar_bg)) {
+  z-index: 10 !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.35) !important;
+  scale: 0.9 !important;
+}
+
+.chat_pane__user_item__avatar:not(:has(img.avatar_bg)):hover {
+  box-shadow: 0 0 14px rgba(0, 0, 0, 0.45),
+              0 0 6px rgba(0, 0, 0, 0.25) inset !important;
+  transform: scale(1.04) !important;
+}
+
+.chat_pane__user_item .chat_pane__user_item__name,
+.chat_pane__user_item .chat_pane__user_item__status {
+  position: relative !important;
+  display: block !important;
+  margin-left: 0.6rem !important;
+  padding-left: 0.2rem !important;
+}
+
+.chat_pane__user_item[dir="rtl"] .chat_pane__user_item__name,
+.chat_pane__user_item[dir="rtl"] .chat_pane__user_item__status,
+html[dir="rtl"] .chat_pane__user_item .chat_pane__user_item__name,
+html[dir="rtl"] .chat_pane__user_item .chat_pane__user_item__status {
+  margin-left: 0.6rem !important;
+}
+/* 🩶 الرسائل الخاصة تحتفظ بارتفاعها الطبيعي */
+.private_message[data-reg-id="1"] {
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+  margin-top: 6px !important;
+  margin-bottom: 6px !important;
+}
+
+/* 🧩 تقليل ارتفاع الرسائل العامة فقط */
+.public_message[data-reg-id="1"] {
+  padding-top: 4px !important;
+  padding-bottom: 4px !important;
+  margin-top: 2px !important;
+  margin-bottom: 2px !important;
+}
+/* 🧭 إصلاح حركة قائمة الأشخاص المتصلين لتتحرك عموديًا فقط */
+#online_users {
+  overflow-y: auto !important;   /* تمرير عمودي فقط */
+  overflow-x: hidden !important; /* منع التمرير الأفقي */
+  white-space: normal !important;
+  display: block !important;
+  max-height: 100%;
+  scroll-behavior: smooth;
+  padding: 0 !important;
+  gap: 0 !important;
+  line-height: normal !important;
+}
+
+/* 🧩 إزالة المسافات بين الأعضاء بدون تغيير حجم الخلفية */
+#online_users .chat_pane__user_item,
+#online_users > div,
+#online_users div[data-reg-id],
+#online_users .user_item {
+  margin: 0 !important;           /* إزالة المسافات */
+  border-radius: 0 !important;    /* جعل الخلفية مستطيلة */
+  border: none !important;
+}
+
+/* ⚫️ خط رمادي خفيف بين الأعضاء المتصلين فقط */
+#online_users .chat_pane__user_item:not(:last-child) {
+  border-bottom: 1px solid rgba(180, 180, 180, 0.25) !important; /* خط رمادي ناعم */
+}
+
+
+/* 🧭 منع التمرير الأفقي داخل قائمة الأعضاء */
+.chat_pane__container.border {
+  overflow-x: hidden !important;   /* يمنع التمرير الأفقي */
+  overflow-y: auto !important;     /* يسمح بالتمرير العمودي */
+  white-space: normal !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  scrollbar-width: thin !important;
+}
+
+/* 🧭 منع التمرير الأفقي في منطقة الدردشة */
+#chat {
+  overflow-x: hidden !important;   /* يمنع التمرير الأفقي */
+  overflow-y: auto !important;     /* يسمح بالتمرير العمودي */
+  white-space: normal !important;  /* يمنع تمدد المحتوى أفقيًا */
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* 🚫 إخفاء النجوم غير الفعالة فقط في الصفحة الرئيسية */
+.chat_pane__user_item--stars .fa-star:not(.checked) {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+/* 🎨 جعل الزاوية العلوية اليسرى فقط مستديرة بدون التأثير على الحجم */
+#online_users .chat_pane__user_item,
+.chat_pane__container.border .chat_pane__user_item {
+  border-radius: 10px 0 0 0 !important; /* الزاوية العلوية اليسرى فقط */
+  margin: 0 !important;                 /* إزالة المسافات بين الأعضاء */
+  overflow: hidden !important;          /* الحفاظ على الشكل النظيف */
+}
+
+/* 🎨 جعل جميع الأزرار وزر الحفظ بزوايا ناعمة وحدود سوداء رقيقة */
+.chat__body__settings_pane__container__button,
+.chat__body__settings_pane__container__submit,
+.chat_pane__header__close {
+  border-radius: 0 10px 0 10px !important;                 /* زوايا ناعمة */
+  border: 1px solid rgba(0, 0, 0, 0.4) !important; /* حدود سوداء خفيفة */
+  overflow: hidden !important;                    /* منع الزوايا الحادة من الداخل */
+  transition: all 0.25s ease-in-out !important;
+}
+
+/* ✨ تأثير عند التحويم */
+.chat__body__settings_pane__container__button:hover,
+.chat__body__settings_pane__container__submit:hover,
+.chat_pane__header__close:hover {
+  filter: brightness(1.1) !important;             /* إضاءة خفيفة */
+  transform: scale(1.02) !important;              /* تكبير بسيط */
+  border-color: rgba(0, 0, 0, 0.6) !important;    /* إبراز الإطار */
+}
+
+/* 🎨 نص أسفل زر الدخول - لون أسود فخم بتأثير احترافي */
+#tabs-content form::after {
+  content: "ستايل الموقع بواسطة: السيّـد نجـم";
+  display: block;
+  margin-top: 6px;
+  margin-bottom: 8px;
+  text-align: right;
+  color: #000;
+  font-size: 10px;
+  font-weight: bold;
+  direction: rtl;
+  letter-spacing: 0.3px;
+
+  /* 🌑 ظل أنيق يبرز النص بشكل فخم */
+  text-shadow:
+    0 1px 1px rgba(255, 255, 255, 0.3),  /* لمعان داخلي خفيف */
+    0 1px 2px rgba(0, 0, 0, 0.5);        /* ظل سفلي ناعم */
+
+  /* 💨 تأثير ظهور ناعم */
+  opacity: 0;
+  transform: translateY(3px);
+  animation: fadeInText 1s ease-out forwards;
+}
+
+/* 🎬 الحركة عند تحميل الصفحة */
+@keyframes fadeInText {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 🧩 إضافة مسافة علوية بدون نص أعلى التبويبات */
+#tabs-content::before {
+  content: "";
+  display: block;
+  margin-top: 10px; /* نفس مقدار المسافة أسفل الزر */
+}
+
+/* 🌑 إضافة ظل أسود للأزرار والحقول فقط بدون تعديل شكلها إطلاقًا */
+#login-form button,
+#login-form input[type="text"],
+#login-form input[type="password"],
+#register-form button,
+#register-form input[type="text"],
+#register-form input[type="password"],
+#guest-form input[type="text"],
+#guest-form button {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4) !important;
+  transition: box-shadow 0.2s ease-in-out !important;
+}
+
+/* ✨ عند المرور بالماوس فقط */
+#login-form button:hover,
+#register-form button:hover,
+#guest-form button:hover {
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.55) !important;
+}
+
+
+/* 🧱 نضمن أن النموذج هو الحاوية المرجعية */
+#login-form {
+  position: relative !important;
+}
+
+/* 👁 الأيقونة في الزاوية اليسرى السفلية */
+#login-form__hidden-toggle {
+  position: absolute !important;
+  bottom: -10px !important;
+  left: -2px !important;
+  z-index: 5 !important;
+  background: none !important;
+  border: none !important;
+  font-size: 15px !important;
+  cursor: pointer !important;
+  color: #000000 !important;   /* أسود افتراضي */
+  transition: all 0.25s ease-in-out !important;
+}
+
+/* ✨ عند تمرير الماوس */
+#login-form__hidden-toggle:hover {
+  transform: scale(1.1);
+}
+
+/* ✅ عندما يكون الـ checkbox مفعّل → يتحول اللون إلى أزرق */
+#login-form__hidden-checkbox:checked + #login-form__hidden-toggle {
+  color: #007BFF !important;   /* أزرق */
+}
+
+/* 🧩 نخفي الـ checkbox تمامًا */
+#login-form__hidden-checkbox {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+/* 🚫 منع التمرير الأفقي فقط داخل صندوق الرسائل */
+#chat__body__messages_container {
+  overflow-x: hidden !important;   /* يمنع التمرير الأفقي */
+  overflow-y: auto !important;     /* يبقي التمرير العمودي طبيعي */
+}
+
+/* 🎯 جعل جميع أزرار قسم "others" بزوايا منحنية أنيقة واحترافية */
+.chat__body__others-pane__container .chat__body__others-pane__container__button {
+  border-radius: 0 10px 0 10px !important;            /* انحناء ناعم واحترافي */
+  transition: all 0.25s ease-in-out !important; /* حركة سلاسة عند التفاعل */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25) !important; /* ظل ناعم فخم */
+  border: 1px solid rgba(0, 0, 0, 0.15) !important;    /* إطار خفيف أنيق */
+  overflow: hidden !important;               /* يمنع أي بروز للعناصر الداخلية */
+}
+
+/* 💫 تأثير فخم عند تمرير الماوس */
+.chat__body__others-pane__container .chat__body__others-pane__container__button:hover {
+  transform: translateY(-2px) !important;  /* حركة خفيفة للأعلى */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35) !important; /* ظل أعمق عند التمرير */
+  filter: brightness(1.05) !important;     /* تفتيح بسيط للألوان */
+  cursor: pointer !important;
+}
+
+/* 🚫 منع التمرير العمودي داخل واجهة الدردشة العامة */
+#chat {
+  overflow-y: hidden !important;   /* يمنع التمرير العمودي */
+  overflow-x: hidden !important;   /* يحافظ على منع الأفقي أيضًا */
+}
+
+/* ⚙️ توسيع مساحة عرض الحالة النصية للأعضاء */
+.chat_pane__user_item__status {
+  white-space: normal !important;       /* يسمح بتعدد الأسطر عند الحاجة */
+  overflow: visible !important;         /* يمنع الاقتصاص */
+  text-overflow: unset !important;      /* يعطل النقاط (…) */
+  max-height: none !important;          /* يزيل أي تحديد للارتفاع */
+  line-height: 1.1em !important;        /* يحافظ على تباعد مريح بين الأسطر */
+  word-wrap: break-word !important;     /* يضمن التفاف الكلمات الطويلة */
+  display: block !important;
+  margin-top: 0px !important;           /* يعطي مسافة لطيفة أسفل الاسم */
+}
+
+/* ===========================================================
+   💎 تأثير زجاجي فخم بأسلوب macOS مع نص أسود أنيق
+   =========================================================== */
+.filter_popup__message {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(255, 255, 255, 0.15) 100%
+  ) !important;
+
+  backdrop-filter: blur(10px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(160%) !important;
+
+  border: 1px solid rgba(0, 0, 0, 0.15) !important;
+  border-radius: 12px !important;
+  padding: 6px 12px !important;
+ 
+
+  color: #000 !important;
+  font-weight: 600 !important;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.4) !important;
+
+  box-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.25),
+    inset 0 1px 1px rgba(255, 255, 255, 0.2) !important;
+
+  transition: none !important;
+}
+
+/* ===========================================================
+   ✨ حركة الشعار ليختفي بالكامل بسرعة وسلاسة
+   =========================================================== */
+@keyframes logoFadeUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-40px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-300%); /* 🔼 الآن يختفي كليًا خارج الشاشة */
+  }
+}
+
+
+/* 🧩 تطبيق الحركة على الشعار */
+#site-logo,
+.intro-logo,
+.logo-animation {
+  animation: logoFadeUp 0.6s ease-in-out forwards !important;
+}
+
+/* 🎯 توحيد مظهر الأزرار (القلب - التعليق - الحذف) */
+.wall_post__body__heart,
+.wall_post__body__comments,
+.wall_post__body__remove {
+  width: 26px !important;             /* نفس العرض لكل زر */
+  height: 19px !important;            /* نفس الارتفاع */
+  border-radius: 0 !important;        /* زوايا مستقيمة */
+  margin: 0 !important;               /* بدون أي مسافات */
+  padding: 0 !important;              /* إزالة الهوامش الداخلية */
+  display: inline-flex !important;    /* محاذاة وسطية للرمز */
+  align-items: center !important;
+  justify-content: center !important;
+  font-size: 10px !important;         /* حجم الرمز داخل الزر */
+  line-height: 1 !important;
+  vertical-align: middle !important;
+}
+
+/* 🔗 جعل الأزرار الثلاثة ملتصقة دون أي فجوة */
+.wall_post__body__heart + .wall_post__body__comments,
+.wall_post__body__comments + .wall_post__body__remove {
+  margin-left: 0 !important;
+  border-left: 1px solid rgba(255, 255, 255, 0.1) !important; /* خط فاصل خفيف */
+}
+
+/* 🧱 محاذاة الحاوية العامة للأزرار */
+.wall_post__body__heart,
+.wall_post__body__comments,
+.wall_post__body__remove {
+  float: right !important;
+}
+
+/* 🎯 تصغير حجم أيقونة زر التعليقات فقط */
+button.wall_post__body__comments.btn.btn-primary.fa.fa-comments {
+  font-size: 10px !important;   /* 🔹 حجم الرمز داخل الزر */
+  width: 26px !important;       /* المحافظة على حجم الزر */
+  height: 19px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 0 !important;
+}
+
+
+/* 🖼️ تعديل الصور الشخصية في الدردشة العامة لتكون مربعة بحدود مستديرة */
+.public_message p.public_message__avatar img {
+  width: 43px !important;
+  height: 43px !important;
+  border-radius: 10px 0 10px 0 !important; /* 🔹 مستديرة قليلاً فقط */
+  object-fit: cover !important;
+  border: 1px solid rgba(0, 0, 0, 0.3) !important; /* 🔸 حدود رقيقة أنيقة */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25) !important; /* ✨ ظل خفيف فخم */
+}
+/* 🎧 زر كتم الصوت بتصميم أنيق */
+#mic-speakers--mute {
+  display: inline-block !important;
+  border-radius: 10px 0 10px 0 !important;
+  overflow: hidden !important;
+  background-color: #ffffff !important; /* اللون الأساسي أبيض */
+  color: #000000 !important; /* الأيقونة سوداء */
+  border: 1px solid rgba(0, 0, 0, 0.2) !important;
+  transition: all 0.3s ease-in-out !important;
+}
+
+
+/* 🎯 تأكيد التأثير داخل العناصر */
+#mic-speakers--mute .fa {
+  transition: color 0.4s ease-in-out !important;
+  color: inherit !important; /* يرث اللون من العنصر الأب */
+}
+
+/* 🎨 زوايا مستديرة لعناصر أعلام الرومات */
+.chat_pane__room_item__flag {
+  border-radius: 10px 0 10px 0 !important; /* الزوايا المطلوبة */
+  overflow: hidden !important;
+  transition: all 0.3s ease-in-out !important;
+}
+
+
+/* ✅ تنسيق الصور داخل الأفاتار */
+.wall_post__avatar img {
+  border-radius: 10px 0 10px 0 !important; /* نفس الزوايا على الصورة نفسها */
+  display: block !important;
+  object-fit: cover !important;
+  transition: all 0.3s ease-in-out !important;
+}
+
+
+/* 🧩 إضافة مسافة بسيطة أعلى عنوان الرسائل العامة */
+h5.public_message__title {
+  margin-top: 6px !important;   /* المسافة من الأعلى */
+  display: block !important;
+}
+
+
+/* 🧩 إضافة مسافة بسيطة بين اسم العضو وحالته في قائمة الأعضاء */
+h5.chat_pane__user_item__name {
+  margin-bottom: 4px !important; /* مسافة أسفل الاسم */
+}
+
+h5.chat_pane__user_item__status {
+  margin-top: 0 !important;      /* يمنع التكرار أو الفراغ الزائد */
+  display: block !important;
+}
+
+
+/* 🧩 إضافة مسافة بسيطة أسفل محتوى الرسائل */
+h5.public_message__content {
+  margin-bottom: 6px !important; /* يمكنك تعديل الرقم لتكبير المسافة */
+}
+
+.fa-user {
+  border-radius: 15px 0 0 0 !important; /* استدارة الحواف فقط */
+  overflow: hidden;                        /* للحفاظ على الشكل الداخلي */
+}
+.login-header__refresh {
+  border-radius: 0 10px 0 10px !important; /* نفس الاستدارة المستخدمة سابقًا */
+  overflow: hidden;                        /* يحافظ على شكل الحواف */
+}
+.login-header__label img {
+  border-radius: 10px 0 10px 0 !important; /* الحواف المستديرة */
+  overflow: hidden;                        /* للحفاظ على الشكل داخل الإطار */
+  vertical-align: middle;                  /* يجعلها بمحاذاة النص تمامًا */
+}
+#login-header {
+  border-radius: 0 !important; /* يجعل كل الزوايا مستقيمة */
+  overflow: hidden;            /* يضمن عدم ظهور أي انحناء داخلي */
+}
+#chat__footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #683838 !important;
+  border-radius: 0 !important; /* إزالة جميع الحدود المستديرة */
+  border-bottom-right-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  padding: 5px 0;
+}
+
+
+#chat__footer__menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#chat__footer__menu .chat__footer__menu__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 25px;                          /* نفس الارتفاع لجميع الأزرار */
+  margin: 0 2px;                         /* تباعد بسيط بين الأزرار */
+  border-radius: 0 10px 0 10px !important; /* ✅ شكل الحواف المطلوب */
+  box-sizing: border-box;
+}
+
+#chat__footer__menu .chat__footer__menu__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 25px;
+  margin: 0 2px;
+  border-radius: 0 10px 0 10px !important;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out; /* سلاسة الانتقال */
+}
+
+/* عند المرور hover */
+#chat__footer__menu .chat__footer__menu__item:hover {
+  transform: translateY(-2px); /* ارتفاع خفيف للأعلى */
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2); /* ظل فخم */
+}
+
+/* عند الضغط active */
+#chat__footer__menu .chat__footer__menu__item:active {
+  transform: translateY(1px) scale(0.98); /* إحساس الضغط الواقعي */
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3); /* ظل داخلي أنيق */
+}
+
+/* لتعديل صور الأفتارات داخل <p class="chat_pane__user_item__avatar has-avatar-bg"> */
+.chat_pane__user_item__avatar.has-avatar-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* الصورة ستغطي المساحة دون تشويه */
+    border-radius: 50%; /* لجعل الصورة دائرية إذا كانت أفتار */
+}
+
+/* لتعديل الخلفيات داخل <div style="height: 150px; background-image: url(-)" class="chat_pane__user_item has-bg"> */
+.chat_pane__user_item.has-bg {
+    background-size: cover; /* ضمان أن الخلفية ستغطي المساحة دون تشويه */
+    background-position: center; /* لضمان أن الصورة تكون في المنتصف */
+}
+
+/* لتعديل الصور داخل <div class="user_profile__cover-container position-relative"> */
+.user_profile__cover-container .user_profile__body__cover {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* الصورة ستغطي المساحة دون تشويه */
+}
+
+
+
+.fa.fa-user {
+    border-radius: 0 !important;
+}
+
+.border-color.chat__body__message-input__input {
+    border-radius: 10px 0 10px 0; /* جعل الزوايا العلوية اليسرى والسفلى اليسرى مستديرة */
+}
+
+/* تحديد مكان القفل في الزاوية اليسرى العليا فقط إذا كان العنصر يحتوي على locked */
+.chat_pane__room_item.locked {
+  position: relative; /* العنصر الحاوي ليكون مرجعية للعنصر القفل */
+}
+
+.chat_pane__room_item--lock {
+  position: absolute; /* تحديد القفل ليكون في مكان معين داخل العنصر */
+  top: 33px; /* تعديل المسافة من الأعلى (يمكنك تعديله حسب الحاجة) */
+  left: 270px; /* تعديل المسافة من اليسار (يمكنك تعديله حسب الحاجة) */
+  width: 16px; /* تحديد حجم القفل */
+  height: 16px; /* تحديد حجم القفل */
+}
+#login-header {
+  display: none;
+}
+
+.border-color.chat__body__message-input__input {
+    border-radius: 10px 0 10px 0; /* جعل الزوايا العلوية اليسرى والسفلى اليسرى مستديرة */
+}
+
+/* تحديد مكان القفل في الزاوية اليسرى العليا فقط إذا كان العنصر يحتوي على locked */
+.chat_pane__room_item.locked {
+  position: relative; /* العنصر الحاوي ليكون مرجعية للعنصر القفل */
+}
+
+.chat_pane__room_item--lock {
+  position: absolute; /* تحديد القفل ليكون في مكان معين داخل العنصر */
+  top: 33px; /* تعديل المسافة من الأعلى (يمكنك تعديله حسب الحاجة) */
+  left: 270px; /* تعديل المسافة من اليسار (يمكنك تعديله حسب الحاجة) */
+  width: 16px; /* تحديد حجم القفل */
+  height: 16px; /* تحديد حجم القفل */
+}
+
+#login-header {
+  display: none;
+}
+
+/* تنسيق الأزرار في صف واحد */
+.extra-buttons {
+  display: flex;
+  justify-content: center; /* تمركز الأزرار في المنتصف */
+  margin-top: -1px !important;  /* إزالة المسافة الفارغة فوق الأزرار */
+  margin-bottom: 10px; /* إزالة المسافة الفارغة تحت الأزرار */
+}
+
+/* تنسيق الأزرار بشكل عام */
+.tab-button {
+  padding: 4px 24px; /* تصغير الأزرار قليلاً */
+  font-size: 10px; /* تصغير حجم الخط */
+  font-weight: bold;
+  background-color: #5C5C5C;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease; /* تأثير اللون والحركة */
+  margin: 0; /* إزالة المسافة بين الأزرار */
+  border-right: 2px solid #5F0000; /* إضافة حد أسود بين الأزرار */
+}
+
+/* إزالة الحدود في الزر الأخير */
+.extra-buttons .tab-button:last-child {
+  border-right: none; /* إزالة الحد عن الزر الأخير */
+}
+
+/* تغيير لون الزر عند المرور عليه */
+.tab-button:hover {
+  background-color: #5F0000; /* تغيير اللون عند المرور */
+  transform: translateY(0px); /* تأثير ارتفاع عند التمرير */
+}
+
+/* تغيير لون الزر عند الضغط عليه */
+.tab-button:active {
+  background-color: #5F0000; /* تغيير اللون عند الضغط */
+  transform: translateY(1.2px); /* تأثير الضغط لأسفل */
+}
+
+/* تنسيق الزر الأول (في اليسار) */
+.extra-buttons .tab-button:first-child {
+  border-radius: 0 0 0 18px; /* الزوايا العليا اليسرى مستديرة */
+}
+
+/* تنسيق الزر الأخير (في اليمين) */
+.extra-buttons .tab-button:last-child {
+  border-radius: 0 0 18px 0; /* الزوايا العليا اليمنى مستديرة */
+}
+
+/* تنسيق الأزرار في المنتصف (زوايا مستقيمة) */
+.extra-buttons .tab-button:not(:first-child):not(:last-child) {
+  border-radius: 0; /* الزوايا مستقيمة */
+}
+
+/* تنسيق نافذة منبثقة مخصصة فقط للأزرار */
+.modal.custom-modal {
+  display: none; /* إخفاء النافذة بشكل افتراضي */
+  position: fixed;
+  z-index: 9999; /* رفع النافذة للأعلى */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* خلفية مظللة أكثر قتامة */
+  padding-top: 40px;
+  box-sizing: border-box; /* لتشمل padding في حسابات الأبعاد */
+  overflow: hidden;
+  backdrop-filter: blur(10px); /* تأثير الضبابية */
+}
+
+/* محتوى النافذة */
+.modal.custom-modal .modal-content {
+  background-color: rgba(255, 255, 255, 0.25); /* خلفية شفافة ولكن مع تظليل أكبر */
+  margin: auto;
+  padding: 18px;
+  border-radius: 12px; /* الزوايا المستديرة */
+  width: 90%; /* توسيع عرض النافذة */
+  max-width: 600px; /* الحد الأقصى للعرض */
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.3); /* الظل الناعم */
+  text-align: center; /* محاذاة النص من اليمين */
+  font-family: 'Arial', sans-serif;
+  border: 1px solid rgba(255, 255, 255, 0.3); /* حدود خفيفة */
+}
+
+/* تنسيق العنوان */
+.modal.custom-modal h1 {
+  font-size: 35px;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 17px;
+}
+
+/* تنسيق المحتوى النصي */
+.modal.custom-modal p, .modal.custom-modal ol {
+  font-size: 14px; /* تكبير حجم الخط */
+  color: #fff;
+  line-height: 1.3; /* زيادة المسافة بين السطور */
+  margin-bottom: 20px;
+  text-align: center; /* محاذاة النص من اليمين */
+}
+
+/* زر الإغلاق */
+.close {
+  color: #fff;
+  font-size: 30px;
+  font-weight: bold;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: #d9534f; /* اللون عند المرور */
+  text-decoration: none;
+}
+
+/* تأثير عند تمرير الماوس على زر الإغلاق */
+.close:hover {
+  color: #d9534f;
+}
+
+/* جعل الأزرار مستديرة ومتناسقة */
+#tabs .nav-item {
+    border-radius: 10px !important;
+    transition: all 0.3s ease-in-out;
+    margin: 0 5px;
+}
+
+/* تصغير الأزرار قليلاً */
+#tabs .nav-link {
+    padding: 8px 0px !important;
+    font-size: 12px;
+    background-color: #ffffff;
+    color: #5F0000;
+    border: 1px solid #5F0000;
+    border-radius: 10px;
+}
+
+/* تأثير التمرير */
+#tabs .nav-item:hover .nav-link {
+    background-color: #5F0000;
+    color: #5F0000;
+    box-shadow: 0 4px 12px rgba(95, 0, 0, 0.3);
+    transform: scale(1.05);
+}
+
+/* تأثير عند التحديد */
+#tabs .nav-item.react-tabs__tab--selected .nav-link {
+    background-color: #5F0000;
+    color: #5F0000;
+    box-shadow: 0 4px 15px rgba(95, 0, 0, 0.5);
+    transform: scale(1.05);
+}
+
+/* التصميم المتجاوب: تحديد العرض للأزرار في الهواتف */
+@media (max-width: 768px) {
+    /* جعل الأزرار لا تتجاوز العرض عند الشاشات الصغيرة */
+    #tabs .nav-item .nav-link {
+        width: auto;  /* تأكد من أن الأزرار تأخذ الحجم الصحيح */
+        font-size: 14px;  /* الحفاظ على حجم الخط المناسب */
+        padding: 8px 16px;  /* الحفاظ على حجم padding لكي لا تصبح الأزرار عريضة */
+    }
+
+    #tabs .nav-tabs {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;  /* السماح بتوزيع الأزرار بشكل مناسب */
+    }
+
+    /* التأكد من أن الأزرار تتناسب مع العرض */
+    #tabs .nav-item {
+        flex: 1 1 30%;  /* التحكم في عرض الأزرار لتكون أكثر مرونة */
+        text-align: center;  /* محاذاة النص في وسط الزر */
+        margin: 5px;  /* إضافة مسافة بين الأزرار */
+    }
+}
+
+/* تحديد عرض الصندوق (الحد الأقصى للعرض) */
+.public_message__content,
+.private_message__body {
+  max-width: 90%; /* تغيير النسبة حسب الحاجة - ستحدد هذا العرض بناءً على المساحة المتاحة */
+  word-break: break-word;  /* يجعل النص ينتقل إلى السطر التالي بدون تقسيم الكلمات */
+  white-space: normal; /* يضمن أن النص يلتف إلى السطر التالي عند الحاجة */
+
+  /* ✅ كانت قيمة غير صالحة (padding-right لا يقبل سالب) والمتصفح كان يتجاهلها أصلاً */
+  /* padding-right: -15px; */
+}
+#connection-state-on,
+#connection-state-off {
+  border-radius: 0 15px 0 9px !important; /* الأعلى يمين - الأعلى يسار - الأسفل يمين - الأسفل يسار */
+  overflow: hidden;
+  height: 0px !important; /* تصغير الارتفاع */
+  padding: 0px 20px !important; /* يمكنك تعديل هذا لتقليل المسافة داخل العنصر */
+}
+
+.chat_pane__room_item__description {
+  width: 280px; /* تقليل العرض، يمكنك تعديل القيمة حسب الحاجة */
+  word-wrap: break-word; /* السماح بتفكيك النص والانتقال للسطر التالي */
+  word-break: break-word; /* إضافي لمنع النص من الخروج عن العرض المحدد */
+  white-space: normal; /* تأكد من أن النص يمكن أن ينتقل إلى السطر التالي */
+  margin-top: 7px; /* إضافة مسافة فارغة في الأعلى */
+}
+
+.chat_pane__room_item--inline {
+    height: 15px; /* تحديد ارتفاع أصغر */
+    padding: 0px 6px; /* تقليل الحشو */
+}
+
+.label.user_profile__footer__actions__item_group__label {
+    height: 25px;
+    line-height: 25px;  /* لضبط محاذاة النص داخل العنصر */
+    padding: 0;         /* إزالة أي حشوة قد تكون موجودة */
+}
+
+.user_profile__footer__actions__item_group__input {
+    border-radius: 10px 0 10px 0 !important;  /* الزوايا المستديرة */
+}
+
+.user_profile__body__status {
+  width: 75%; /* أو تحديد عرض معين مثل 200px */
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+
+  /* ✅ كانت بدون وحدة (px) — غالبًا ما تُهمل حسب المتصفح */
+  margin-right: 10px;
+
+  margin-left: auto; /* تحريك العنصر إلى اليمين */
+}
+
+.chat_pane__user_item--stars {
+  margin-top: 1px; /* تقليل المسافة العلوية (يمكنك تغيير القيمة حسب الحاجة) */
+  margin-bottom: 6px; /* زيادة المسافة السفلية (يمكنك تعديل القيمة حسب الحاجة) */
+}
+
+.filter_popup__message {
+  font-weight: normal !important; /* إلغاء التحديد بـ bold وجعل الخط بالحجم الطبيعي */
+}
+
+.chat_box__footer__input {
+  border-radius: 10px 0 10px 0 !important;
+}
+
+#chat_box__footer__call {
+  display: none !important;
+}
+
+
+#chat__body__rooms_pane__create_chat-group {
+  border-radius: 10px 0 10px 0; /* الزوايا العلوية اليمنى والسفلية اليسرى ستكون مستديرة */
+}
+
+#chat__body__rooms_pane__create_room {
+  border-radius: 0 10px 0 10px; /* الزوايا العلوية اليمنى والسفلية اليسرى ستكون مستديرة */
+}
+
+.chat_pane__container__banner {
+  border-radius: 0 0 15px 15px ; /* جعل الزوايا مستديرة */
+  padding: 6px; /* إضافة padding لتحسين ترتيب المحتوى */
+  box-shadow: 
+    inset 0 4px 6px rgba(0, 0, 0, 0.1), /* الظل الداخلي الخفيف */
+    inset 0 8px 16px rgba(0, 0, 0, 0.1), /* الظل الداخلي المتوسط */
+    inset 0 12px 24px rgba(0, 0, 0, 0.1), /* الظل الداخلي العميق */
+    0 6px 12px rgba(0, 0, 0, 0.1), /* الظل الخارجي الخفيف */
+    0 8px 16px rgba(0, 0, 0, 0.1); /* الظل الخارجي العميق */
+}
+
+.private_message__avatar {
+    border-radius: 50% !important;
+    overflow: hidden;
+}
+
+.chat_box__header__avatar {
+    border-radius: 50% !important;
+    overflow: hidden;
+}
+
+.conversations_item__avatar {
+    border-radius: 50% !important;
+    overflow: hidden;
+}
+
+/* ============================= */
+/*   شكل المنشور الأساسي        */
+/* ============================= */
+
+.wall_post {
+    position: relative;
+    background: #ffffff;
+    border: 1px solid #e6e6e6;
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+
+
+/* تثبيت حجم الأفتار في كل المنشورات */
+.wall_post__avatar {
+    width: 40px !important;          /* اختر الحجم المناسب لك */
+    height: 40px !important;         /* نفس العرض = مربع ثابت */
+    border-radius: 10px 0 10px 0 !important;
+    overflow: hidden !important;      /* مهم لقصّ الصورة داخل الإطار */
+    flex-shrink: 0 !important;        /* يمنع تمدد/تقلص الصورة */
+}
+
+/* الصورة داخل الأفتار — تُقص داخل المربع */
+.wall_post__avatar img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;     /* يجعل الصورة مربعة حتى لو كانت مستطيلة */
+    border-radius: 10px 0 10px 0 !important;
+}
+
+
+/* ----------------------------- */
+/*      إزالة التمرير بالكامل   */
+/* ----------------------------- */
+
+.wall_post * {
+    overflow: visible !important;
+}
+
+.wall_post div[style*="overflow"] {
+    overflow: visible !important;
+}
+
+/* النصّ يظهر فوق بدون ضغط أو قص */
+.wall_post__body--text,
+.wall_post__body {
+    white-space: normal !important;
+    display: block !important;
+    max-height: none !important;
+}
+
+/* المحتوى يأخذ مساحته الطبيعية */
+.wall_post > div {
+    flex: 1 1 auto !important;
+    min-height: auto !important;
+}
+
+/* ============================= */
+/*    ترتيب الأزرار + الخط       */
+/* ============================= */
+
+/* إزالة الفلوت من الأزرار */
+.wall_post .wall_post__body__remove,
+.wall_post .wall_post__body__comments,
+.wall_post .wall_post__body__heart {
+    float: none !important;
+    margin: 0 !important;
+}
+
+/* كونتينر الأزرار */
+.wall_post > div div[style*="max-width"] {
+    width: 100% !important;
+    float: none !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding-top: 10px !important;
+    gap: 1px !important;
+    margin-top: 10px !important;
+    position: relative;
+}
+
+/* الخط الفاصل فوق الأزرار */
+.wall_post > div div[style*="max-width"]::before {
+    content: "";
+    width: 100%;
+    height: 1px;
+    background: #e2e2e2;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* تحسين شكل الأزرار بدون تغيير حجمها */
+.wall_post button {
+    border-radius: 6px !important;
+}
+
+/* ============================= */
+/*       تحسين ترتيب المحتوى     */
+/* ============================= */
+
+.wall_post__name {
+    margin: 0 0 5px 0;
+    font-weight: bold;
+}
+
+.wall_post__time {
+    font-size: 12px;
+    opacity: 0.6;
+    float: right;
+}
+
+.wall_post__body--text {
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.wall_post--media-btn,
+.yt-btn {
+    margin-bottom: 2px !important;
+}
+
+button.wall_post__body__comments {
+    border-radius: 6px !important;
+    clip-path: inset(0 round 6px) !important;
+}
+
+.private_message__body--remove {
+  width: 20px !important;
+  height: 20px !important;
+  border-radius: 50% !important;
+  padding: 0 !important;
+}
+
+
+.conversations_item__remove {
+  border-radius: 0 7px 0 7px !important;
+  padding: 0 !important; /* يحافظ على الحجم */
+}
+
+#chat__body__wall_pane__form__input {
+    border-radius: 10px 0 10px 0 !important; /* ترتيب الزوايا: أعلى يسار، أعلى يمين، أسفل يمين، أسفل يسار */
+}
+
+#wall_comments__form__input {
+    border-radius: 10px 0 10px 0 !important; /* ترتيب الزوايا: أعلى يسار، أعلى يمين، أسفل يمين، أسفل يسار */
+}
+
+#chat_box__header__mute {
+    border-radius: 0 10px 0 10px !important; /* أعلى يسار 10px، أعلى يمين 0، أسفل يمين 10px، أسفل يسار 0 */
+}
+
+.private_message {
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
+}
+
+#chat__body__message-reply {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background-color: rgba(0, 0, 0, 0.3); /* خلفية داكنة مع شفافية */
+  backdrop-filter: blur(10px); /* تأثير الضبابية للزجاج */
+  border-radius: 8px;
+  padding: 5px 10px;
+  margin: 5px 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* ظل داكن لجعل العنصر يبرز */
+  margin-top: -10px; /* تحريك النافذة للأعلى */
+}
+
+#chat__body__message-reply--undo {
+  background-color: rgba(255, 99, 71, 0.8); /* لون الزر الأحمر الباهت مثل التفاح */
+  color: white;
+  border: none;
+  border-radius: 50% !important; /* جعل الزر دائري */
+  width: 25px !important; /* زيادة الحجم */
+  height: 25px !important; /* زيادة الحجم */
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease; /* تأثير عند التمرير */
+  margin-left: auto; /* الزر إلى اليمين */
+}
+
+#chat__body__message-reply--undo:hover {
+  background-color: rgba(255, 69, 58, 0.9); /* تغير اللون عند التمرير */
+}
+
+#chat__body__message-reply--username {
+  color: #fff; /* اسم المستخدم باللون الأبيض */
+  font-size: 12px;
+  font-weight: bold;
+  position: relative; /* تمكين التحريك */
+  top: -5px; /* رفع العنصر قليلاً */
+}
+
+#chat__body__message-reply--message {
+  color: #fff; /* الرسالة باللون الأبيض */
+  font-size: 14px;
+}
+
+
+
+
+
+
+/* إعدادات الحاوية التي تحتوي على الأزرار */
+.public_message__buttons {
+  position: absolute;
+  display: inline-block;
+  width: 100%;
+}
+
+/* زر الثلاث نقاط */
+.options-btn {
+  font-size: 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0px;
+  color: #262626;
+  font-weight: bold;
+  position: absolute;
+  bottom: 13px;
+  right: 5px;
+
+  /* ✅ كانت قيمة غير صالحة (z-index لا يقبل كسور) — المتصفح كان يتجاهلها */
+  /* z-index: 0.8; */
+  z-index: 0; /* أقرب قيمة منطقية بدون تغيير السلوك العام */
+}
+
+/* نافذة منبثقة تحتوي على الأزرار */
+.options-menu {
+  display: none;
+  position: absolute;
+  top: -47px;
+  right: 3px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 7px;
+  padding: 9px;
+  width: auto;
+  height: auto;
+  z-index: 0;
+  font-size: 14px;
+
+  /* ترتيب أزرار الرد والحذف بجانب بعض */
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+/* أزرار الرد والحذف */
+.options-menu button {
+  display: inline-flex; /* جنب بعض */
+  width: auto;
+  padding: 5px;
+  text-align: center;
+  background: none;
+  border: none;
+  color: #333;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 0px;
+  border-radius: 5px;
+}
+
+/* تأثير التحويم */
+.options-menu button:hover {
+  background-color: #f1f1f1;
+}
+
+#chat_box__header__compress {
+  border-radius: 0 10px 0 10px !important;
+}
+
+
+
+
+.chat_pane__room_item {
+    position: relative;
+    transition: all 0.3s ease-in-out;
+}
+
+/* الغرفة المختارة */
+.chat_pane__room_item.active {
+    background-color: #ffffff !important; /* خلفية واضحة */
+    border-radius: 10px !important;       /* زوايا مستديرة ناعمة */
+
+    /* الظل ثلاثي الأبعاد */
+    box-shadow:
+        0 12px 24px rgba(0, 0, 0, 0.35), /* ظل خارجي */
+        0 7px 15px rgba(0, 0, 0, 0.15),   /* ظل ثانوي */
+        inset 0 0 13px rgba(0, 0, 0, 0.10); /* ظل داخلي خفيف */
+
+    transform: translateY(-5px); /* رفع خفيف لإحساس البروز */
+    z-index: 10;                 /* للتأكد من ظهورها فوق باقي الغرف */
+
+    /* الحدود الملونة */
+    border: 2px solid #7D0000 !important; /* لون احترافي */
+}
+
+
+.chat_pane__room_item.active {
+    margin-top: 8px; /* مسافة فوق الغرفة المختارة */
+}
+
+.username__wrapper {
+    background-color: transparent !important;
+}
+
+
+.user_profile__avatar-overlay {
+    display: inline-block; /* للسماح بالظل */
+    box-shadow:
+        0 0 8px rgba(0, 0, 0, 0.8),   /* أول طبقة من التوهج */
+        0 0 16px rgba(0, 0, 0, 0.6),  /* توهج إضافي أكبر */
+        0 0 24px rgba(0, 0, 0, 0.4);  /* توهج خارجي لتأثير احترافي */
+}
+
+.user_profile__avatar-overlay img.user_profile__body__avatar {
+    display: block; /* إزالة أي فراغات حول الصورة */
+}
+
+#chat {
+    border-radius: 0 !important; /* إزالة أي زوايا مستديرة */
+}
+
+
+/* label الخاص بلون الخلفية فقط */
+label.label.label-primary:has(+ input[name="nameBgColor"]),
+
+/* input لون الخلفية */
+input[name="nameBgColor"],
+
+/* زر الإزالة المرتبط به */
+input[name="nameBgColor"]
+  + button.chat__body__settings_pane__container__rm_bg_color {
+
+    display: block !important;
+
+    height: 0 !important;
+    max-height: 0 !important;
+    min-height: 0 !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+
+    line-height: 0 !important;
+    font-size: 0 !important;
+
+    overflow: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+input[name="statusColor"],
+input[name="fontColor"],
+input[name="nameColor"] {
+    border-radius: 15px !important; /* يجعل الحواف مستديرة */
+}
+
+#mic-speakers--mute {
+    display: inline-block !important; /* لتتمكن من التحكم بالارتفاع */
+    height: 44px !important;          /* تقليل ارتفاع العنصر */
+    position: relative;                /* لتتمكن من تحريك العنصر */
+    top: 2px;                          /* إنزاله للأسفل بمقدار 3 بكسل */
+}
+
+/* رفع أيقونات FontAwesome داخل العنصر */
+#mic-speakers--mute .fa {
+    position: relative;        /* لتتمكن من تحريك الأيقونة */
+    top: -2px;                 /* رفع الأيقونة بمقدار 3px */
+    display: inline-block;     /* لضمان إمكانية التحريك */
+}
+
+
+/* القوائم الأفقية */
+#chat__body__settings_pane__container__user-avatar-backgrounds,
+#chat__body__settings_pane__container__user-backgrounds {
+    display: flex;
+    gap: 3px;
+    padding: 7px;
+    overflow-x: auto;        /* التمرير شغال */
+    overflow-y: hidden;
+    
+    -ms-overflow-style: none; /* IE / Edge */
+    scrollbar-width: none;    /* Firefox */
+}
+
+/* Chrome / Safari / Opera */
+#chat__body__settings_pane__container__user-avatar-backgrounds::-webkit-scrollbar,
+#chat__body__settings_pane__container__user-backgrounds::-webkit-scrollbar {
+    height: 0;               /* الشريط موجود لكن غير مرئي */
+}
+
+/* العناصر الداخلية */
+.user-background-item {
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    transition: box-shadow 0.2s ease;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+/* تأثير hover */
+.user-background-item:hover {
+    box-shadow: 0 6px 12px rgba(0,0,0,0.25);
+}
+
+/* أيقونة الحذف بدون تغيير مكانها */
+.remove-user-background {
+    transition: background 0.2s ease;
+}
+
+.remove-user-background:hover {
+    background: rgba(255,0,0,0.8);
+    cursor: pointer;
+}
+
+
+/* الغلاف */
+.user_profile__body__cover {
+    border-radius: 0 0 12px 12px;
+}
+
+
+/* الحقول */
+.user_profile__footer__actions__item_group__input,
+.user_profile__footer__actions__item_group select {
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.15);
+}
+
+.public_message--reply {
+    border-radius: 8px;
+    box-shadow: 
+        inset 0 2px 4px rgba(0,0,0,0.12),
+        inset 0 1px 3px rgba(255,255,255,0.25);
+    border: 1px solid rgba(0,0,0,0.15);
+}
+#room_modal__body__form__delete,
+.btn-success.pull-left,
+.btn.room_modal__header__close,
+.btn.dialog_modal__header__close,
+.btn[data-dismiss="modal"],
+.btn-submit.btn.btn-success,
+.btn.btn-danger,
+textarea,
+#room_modal__body__form input {
+  border-radius: 0 10px 0 10px;
+  overflow: hidden; 
+}
+
+.form-control {
+  border-radius: 10px 0 10px 0 !important;
+  overflow: hidden;
+  margin-left: 1px !important; 
+}
+
+#chat_pane_youtube__input {
+  border-radius: 10px 0 10px 0 !important;
+}
+
+.status_content {
+  line-height: 1.4;  
+  position: relative;
+  top: -4px;      
+}
+
+#chat__footer__menu .chat__footer__menu__item {
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+  border-radius: 5px;
+  transition: box-shadow 0.3s ease; 
+}
+
+/* اختياري: هالة أقوى عند المرور على الزر */
+#chat__footer__menu .chat__footer__menu__item:hover {
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.7);
+}
+
+.chat_pane__container__posts {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;            
+  padding: 10px;
+  background: #f7f7f7;   
+  border-radius: 8px;
+}
+
+.chat_pane__container__post {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 10px;
+  background: #ffffff;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08); 
+}
+
+.chat_pane__container__post .grade {
+  min-width: 22px;
+  text-align: center;
+  font-weight: bold;
+  color: #2c7be5;    
+}
+
+.chat_pane__container__post .avatar {
+  border-radius: 50%;
+  flex-shrink: 0;      
+}
+
+.chat_pane__container__post .name {
+  flex-grow: 1;
+  font-weight: 500;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chat_pane__container__post .rank {
+  min-width: 55px;
+  text-align: right;
+  font-size: 0.9em;
+  color: #777;
+}
+
+.chat_pane__container__podium-grade.grade-3 {
+  background: #cd7f32 !important;
+  border-top: none !important;
+}
+
+.chat_pane__container__podium-grade.grade-1 {
+  background: linear-gradient(135deg, #FFD700, #FFB700) !important;
+  border-top: none !important;
+  box-shadow: 0 0 8px rgba(255, 215, 0, 0.6) !important;
+}
+
+.chat_pane__container__podium-grade.grade-2 {
+  background: #C0C0C0 !important;
+  border-top: none !important;
+}
+
+.mic-speakers--item__avatar {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+p.label-count.label.label-primary,
+p.label-count.label.label-primary * {
+    border-radius: 0 !important;
+
+    border-bottom-left-radius: 14px !important; /* يسار سفلي */
+    border-top-right-radius: 14px !important;   /* يمين علوي */
+}
+
+p.label-count.label.label-primary {
+    align-items: center;                   /* يبقي النص عمودي في الوسط */
+    height: 25px !important;               /* اختر الارتفاع المناسب */
+    padding: 0 6px !important;             /* حافظ على المسافة الأفقية */
+    line-height: normal !important;
+}
+
+#connection_container {
+    display: inline-block;      /* يسمح للعنصر بالارتفاع حسب height */
+
+    /* ✅ كانت قيمة غير صالحة (height لا يقبل سالب) والمتصفح كان يتجاهلها */
+    /* height: -12px !important; */
+
+    line-height: 17px !important; /* لضبط تمركز النص عموديًا */
+    vertical-align: top;        /* يمنع أي تأثير على العناصر المحيطة */
+}
+
+
+#online_users {
+    margin-top: 3px !important; /* عدّل الرقم حسب ما تحب */
+}
+
+#online_users .chat_pane__user_item {
+    border-radius: 8px !important;
+    background-clip: padding-box !important;
+    transition: background-color 0.25s ease, box-shadow 0.25s ease !important;
+}
+
+#online_users .chat_pane__user_item:not(:last-child) {
+    box-shadow: inset 0 -1px 0 rgba(0,0,0,0.04) !important;
+}
+
+#online_users .chat_pane__user_item.has-bg {
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.05) !important;
+}
+
+#online_users .chat_pane__user_item {
+    margin-bottom: 1px !important;
+}
+
+#online_users .chat_pane__user_item:hover {
+    background-color: rgba(0, 0, 0, 0.03) !important;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.04) !important;
+}
+.public_message.public_message_ad {
+    position: relative !important;
+
+    border-radius: 12px !important;
+    padding: 10px 14px !important;
+
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+
+    box-shadow:
+        0 4px 10px rgba(0, 0, 0, 0.06) !important;
+
+    transition:
+        box-shadow 0.25s ease,
+        transform 0.25s ease !important;
+}
+
+.public_message.public_message_ad::before {
+    content: "" !important;
+    position: absolute !important;
+    inset: 0 !important;
+    border-radius: inherit !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.7) !important;
+    pointer-events: none !important;
+}
+
+
+.user_profile__body__stats {
+    margin-bottom: 7px !important;
+}
+
+/* الغرفة بدون transform لتجنب stacking context */
+.user_profile__body__room {
+    transform: none !important;       /* إزالة translateY السابق */
+    margin-top: 0 !important;         /* إذا تريد تحريك ضع هنا margin */
+}
+
+/* النجوم بدون transform */
+.user_profile__body__stats--stars {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    border: 0.01px solid #3A3A3A !important;
+    border-radius: 8px !important;
+
+    padding: 4px 6px !important;
+    line-height: 1 !important;
+
+    transform: none !important;       /* إزالة translate السابق */
+    margin-left: 13px !important;     /* تعويض عن translateX */
+    margin-top: 5px !important;       /* تعويض عن translateY */
+}
+
+/* النقاط بدون transform */
+.user_profile__body__stats--points {
+    display: inline-block !important;
+    transform: none !important;       /* إزالة translateY السابق */
+    margin-top: 12px !important;      /* تعويض عن translateY */
+}
+
+
+#user_profile__cover-change {
+    border-radius: 10px 0 10px 0 !important;
+    
+    display: flex !important;
+    align-items: center !important;      /* توسيط عمودي */
+    justify-content: center !important;  /* توسيط أفقي */
+}
+
+/* استهداف الرسائل الإعلانية فقط */
+.public_message.public_self_message.public_message_ad .public_message__content {
+    max-width: 100% !important; /* السماح بالاستفادة الكاملة من المساحة */
+    width: auto !important;      /* التأكد من عدم تقيدها بعرض معين */
+    white-space: normal !important; /* السماح بالالتفاف للنصوص الطويلة */
+}
+
+
+/* الحاوية التي تحمل كل الرسائل */
+.conversations_item__holder.fl {
+    border: none !important;  
+    box-sizing: border-box !important; /* لضمان عدم تأثير البادينج على العرض */
+}
+
+/* صورة المستخدم */
+.conversations_item__avatar img.radius {
+    width: 60px !important;
+    height: 60px !important;
+    object-fit: cover !important;  
+    border-radius: 50% !important; 
+    display: block !important;      
+}
+
+/* الحاوية العامة للرسائل */
+.conversations_item__holder {
+    width: 85% !important; 
+    max-width: 1200px !important; 
+    margin: 0 auto !important;
+    padding-right: 15px !important; 
+    box-sizing: border-box !important;
+}
+
+/* أسماء المستخدمين والرسائل */
+.conversations_item__name,
+.conversations_item__last_message {
+    display: block !important; 
+    margin-top: 3px !important;
+}
+
+/* مربع الرسالة */
+.conversations_item__last_message {
+    width: 70% !important;              
+    height: 40px !important;            
+    margin-left: auto !important;       
+    margin-right: 10px !important;      
+    padding: 5px 10px !important;       
+    box-sizing: border-box !important;  
+    overflow: hidden !important;        
+    text-overflow: ellipsis !important; 
+    white-space: nowrap !important;     
+    border: 1px solid #ccc !important;             
+    border-radius: 5px !important;                 
+    background-color: #f9f9f9 !important;          
+}
+
+/* تحويل الأسود إلى أبيض فقط للأيقونات داخل العناصر المحددة */
+.chat_box__header__name img.username__icon,
+.user_profile__header__name img.username__icon {
+    filter: brightness(0) invert(1) !important;
+}
+
+
+.chat_pane__user_item--stars {
+    margin-left: 5px; /* عدّل الرقم حسب اللي يناسبك */
+}
+
+button.btn.btn-success.fa.fa-arrow-left {
+    border-radius: 10px 0 10px 0;
+}
+
+button.btn.btn-danger.fa.fa-times.public_message__remove {
+    border-radius: 0 !important;
+}
+
+
+
+.private_message__avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;     /* إطار دائري */
+    overflow: hidden;       /* قص أي جزء زائد */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.private_message__avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;      /* أهم سطر: قص ذكي بدون تشويه */
+    object-position: center;
+    display: block;
+}
+
+.chat_box__header__avatar {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;     /* دائري */
+    object-fit: cover;      /* قص تلقائي ذكي */
+    object-position: center;
+    display: block;
+}
+
+.user_profile__header__name.ellipsis .username__wrapper,
+.chat_box__header__name.ellipsis .username__wrapper {
+    color: #ffffff !important;  
+}
+
+.wall_post__avatar {
+  border-radius: 10px 0 10px 0 !important;
+  overflow: hidden !important; /* للتأكد أن أي محتوى داخل يلتزم بالزوايا */
+}
+
+
+.public_message.auto_reply {
+  background-color: #f0f4f8; /* الخلفية كما هي */
+  border-left: 5px solid #7D0000; /* خط أزرق أصبح حسب لون الثيم */
+  border-radius: 8px;
+  padding: 0rem 1rem;
+  color: #1f2937;
+  font-weight: 500;
+  font-size: 0.95rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  position: relative;
+  transition: all 0.2s ease-in-out;
+}
+
+.public_message.auto_reply .public_message__avatar {
+    position: relative;       /* احتفظ به للتأكد */
+    top: 7px;                 /* نزّل العنصر للأسفل */
+    transform: translateX(-10px);  /* حرك العنصر لليسار */
+}
+
+.public_message.public_message_ad .public_message__remove {
+  border-radius: 0 10px 0 10px !important; /* تطبيق الحواف المستديرة فقط */
+  display: inline-block !important; /* تأكد من أن الزر يظهر */
+}
+
+
+/* تصميم الرسائل */
+.public_message.linen {
+    display: block !important;
+    padding: 3px 3px !important;               
+    border-radius: 12px !important;             
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15) !important; 
+    font-weight: bold !important;
+    position: relative !important;
+    margin: 5px auto !important;                
+    max-width: 75% !important;   /* تم زيادة العرض من 65% إلى 75% */
+    color: inherit !important;                   
+    text-align: center !important;               
+    line-height: 1.4 !important;                 
+}
+
+
+
+.public_message.linen.js-move .chat_pane__room_item--inline.label.label-primary,
+.public_message.linen.js-join .chat_pane__room_item--inline.label.label-primary {
+    display: none !important;
+}
+
+
+
+/* دخول عضو */
+.public_message.linen.js-join {
+    border-left: 5px solid #2ecc71 !important;
+}
+
+/* خروج عضو */
+.public_message.linen.js-leave {
+    border-left: 5px solid #e74c3c !important;
+}
+
+.public_message.linen.js-move {
+    border-left: 5px solid #f1c40f !important; /* لون محايد */
+}
+
+.public_message.linen.js-kick {
+    border: 2px solid #D51919 !important;
+    border-radius: 10px;
+    background: #FFEEE9;
+
+    box-shadow:
+        /* توهج خارجي */
+        0 0 6px rgba(255, 30, 30, 0.9),
+        0 0 12px rgba(255, 30, 30, 0.6),
+
+        /* توهج داخلي */
+        inset 0 0 6px rgba(255, 30, 30, 0.8),
+        inset 0 0 10px rgba(255, 30, 30, 0.5) !important;
+}
+
+
+/* ===============================
+   Emoji Picker - Responsive
+================================ */
+.emoji_picker {
+    background: #ffffff;
+    border: 1px solid #dcdcdc;
+    border-radius: 6px;
+
+    padding: 8px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(26px, 1fr));
+    gap: 6px;
+
+    max-width: 90vw; /* لا يتجاوز 90% من عرض الشاشة */
+    max-height: 300px;
+    overflow-y: auto;
+
+    position: absolute; /* ضروري للتحريك بجانب الزر */
+    z-index: 9999;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* الإيموجيات */
+.emoji_picker .emoji_picker__item {
+    width: 26px;
+    height: 26px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+    border-radius: 4px;
+
+    transition: background 0.15s ease;
+}
+
+.emoji_picker .emoji_picker__item:hover {
+    background: #f2f2f2;
+}
+
+/* للصندوق wall فقط */
+.emoji_picker.wall {
+    max-width: 90vw !important;
+    width: 90vw !important;
+    position: fixed !important;
+    z-index: 9999 !important;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(26px, 1fr)) !important;
+    gap: 6px !important;
+    height: 300px !important;        /* ارتفاع ثابت */
+    max-height: 300px !important;    /* الحد الأعلى للارتفاع */
+    overflow-y: auto !important;     /* شريط تمرير رأسي إذا محتوى أكثر */
+}
+/* الخلفية */
+.image-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.65);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    z-index: 9998;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+}
+
+.image-backdrop.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* الصورة المكبرة (نسخة مستقلة) */
+.image-preview {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+    max-width: 92vw;
+    max-height: 92vh;
+    z-index: 9999;
+    box-shadow: 0 25px 70px rgba(0,0,0,0.6);
+    border-radius: 8px;
+    opacity: 0;
+    transition: all 0.25s ease;
+    cursor: zoom-out;
+}
+
+.image-preview.active {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.remove-user-background {
+    background: none !important;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+
+    cursor: pointer;
+    padding: 4px;
+
+    transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+/* عند المرور */
+.remove-user-background:hover {
+    opacity: 0.7;
+}
+
+/* عند الضغط */
+.remove-user-background:active {
+    transform: scale(0.85);
+    opacity: 0.5;
+}
+
+/* نص الزر أبيض دائمًا لجميع الـ select */
+#chat__body__settings_pane__container__button--change-font-size,
+#chat__body__settings_pane__container__button--change-font-size:focus,
+#chat__body__settings_pane__container__button--change-font-size:active,
+#chat__body__settings_pane__container__button--change-state,
+#chat__body__settings_pane__container__button--change-state:focus,
+#chat__body__settings_pane__container__button--change-state:active {
+    color: white !important;              /* نص أبيض */
+}
+
+/* خيارات القائمة لتكون واضحة */
+#chat__body__settings_pane__container__button--change-font-size option,
+#chat__body__settings_pane__container__button--change-state option {
+    color: black !important;               /* نص الخيارات أسود */
+    background-color: white !important;    /* خلفية الخيارات */
+}
+
+
+body {
+  cursor: default;
+  margin: 0;
+  padding: 0;
+  touch-action: none; /* مهم: نمنع scroll الافتراضي أثناء اللمس لتتبع الحركة */
+}
+
+#cursor-trail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+button.gifts_picker__contianer__close {
+  display: none !important;
+}
+
+#gifts_back_btn {
+    margin-bottom: 10px;
+    padding: 3px 6px !important;           /* تصغير الزر قليلاً */
+    cursor: pointer;
+    border-radius: 8px;          /* حواف مستديرة */
+    border: none;                /* إزالة الحدود الافتراضية */
+    background-color: #e74c3c;   /* لون أحمر كدلالة على الإغلاق */
+    color: white;                /* لون الخط أبيض */
+    transition: background-color 0.3s ease; /* تأثير سلس عند المرور */
+}
+
+#gifts_back_btn:hover {
+    background-color: #c0392b !important;   /* تغيير اللون عند المرور */
+}
+
+/* CSS للمربع مع زوايا مستديرة، إخفاء شريط التمرير، ومسافة من الجوانب */
+.gifts_picker__contianer {
+  border: 1px solid black;   /* الخط الأسود */
+  border-radius: 8px;        /* زوايا مستديرة */
+  padding: 1px;             /* مساحة داخلية للنصوص */
+  margin: 15px 10px;            /* مسافة من اليمين واليسار */
+  box-sizing: border-box;
+  max-height: 300px;         /* ارتفاع ثابت لتفعيل التمرير عند الحاجة */
+  overflow-y: scroll;        /* التمرير العمودي */
+  scrollbar-width: none;     /* Firefox */
+  -ms-overflow-style: none;  /* IE 10+ */
+}
+
+/* Chrome, Safari, Opera */
+.gifts_picker__contianer::-webkit-scrollbar {
+  width: 0px;                /* إخفاء شريط التمرير */
+  background: transparent;    /* خلفية شفافة */
+}
+
+/* =========================
+   STORY BOARD – PRO LOOK
+   ========================= */
+
+:root{
+  --sb-radius: 16px;
+  --sb-shadow: 0 10px 26px rgba(0,0,0,.16);
+  --sb-shadow-hover: 0 14px 34px rgba(0,0,0,.22);
+}
+
+/* الحاوية */
+.story-board{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:10px 6px;
+  overflow-x:auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* عنصر الستوري */
+.story-board--item{
+  position:relative;
+  border-radius: var(--sb-radius);
+  overflow:hidden;
+  box-shadow: var(--sb-shadow);
+  border: 1px solid rgba(255,255,255,.08);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.story-board--item:hover{
+  transform: translateY(-2px);
+  box-shadow: var(--sb-shadow-hover);
+}
+
+/* صورة الخلفية */
+.story-board--item .img_bg{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* تدرج سفلي فقط (بدون لمس الاسم) */
+.story-board--item::after{
+  content:"";
+  position:absolute;
+  inset:auto 0 0 0;
+  height:55%;
+  background: linear-gradient(to top, rgba(0,0,0,.55), transparent);
+  pointer-events:none;
+}
+
+/* صورة المستخدم */
+.story-board--item .img_user{
+  position:absolute;
+  top:10px;
+  left:10px;
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  object-fit:cover;
+  box-shadow:
+    0 0 0 2px #fff,
+    0 8px 16px rgba(0,0,0,.25);
+}
+
+/* =========================
+   ADD STORY (+)
+   ========================= */
+
+.story-board--item.add{
+  border: 1px dashed rgba(255,255,255,.25);
+  box-shadow: 0 10px 22px rgba(0,0,0,.12);
+}
+
+/* زر + (أبيض، صغير، في المنتصف أسفل الكرت) */
+.story-board--item.add .plus{
+  position:absolute;
+  left:50%;
+  bottom:8px;
+  transform: translateX(-50%);
+
+  width:30px;
+  height:30px;
+
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+
+  background:#fff;
+  border:1px solid rgba(255,255,255,.9);
+  box-shadow: 0 10px 20px rgba(0,0,0,.25);
+
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.story-board--item.add:hover .plus{
+  transform: translateX(-50%) scale(1.08);
+  box-shadow: 0 14px 28px rgba(0,0,0,.30);
+}
+
+/* أيقونة + */
+.story-board--item.add .plus svg{
+  width:16px;
+  height:16px;
+  stroke-width:3;
+  color:#000;
+}
+
+/* ==================================================
+   YouTube Search + Results – FINAL TRUE CENTER
+   (Reduced Height – Polished)
+   ================================================== */
+
+/* =========================
+   Search Wrapper
+   ========================= */
+
+#chat_pane_youtube{
+  position: relative;
+  padding: 10px;
+  z-index: 50;
+}
+
+/* =========================
+   Search Bar
+   ========================= */
+
+#chat_pane_youtube form{
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  background: #ffffff;
+  border-radius: 18px;
+
+  /* مساحات متساوية يمين ويسار (تعادل الأزرار) */
+  padding: 5px 56px;
+
+  min-height: 42px; /* ⬇️ أقل قليلاً */
+  margin: 0;
+
+  box-shadow: 0 8px 25px rgba(0,0,0,.12);
+}
+
+/* =========================
+   Textarea – توسيط أفقي حقيقي
+   ========================= */
+
+#chat_pane_youtube__input{
+  flex: 1;
+
+  border: none !important;
+  outline: none !important;
+  resize: none !important;
+
+  background: transparent !important;
+  color: #222;
+  font-size: 14px;
+
+  height: 30px !important;       /* ⬇️ أقل */
+  min-height: 30px !important;
+
+  /* 🔑 التوسيط الحقيقي */
+  text-align: center !important;
+  direction: ltr !important;
+  unicode-bidi: plaintext;
+
+  /* توسيط عمودي */
+  line-height: 18px !important;
+  padding-top: 6px !important;   /* ⬇️ أقل */
+  padding-bottom: 6px !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+
+  margin: 0 !important;
+
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+
+  box-sizing: border-box !important;
+  font-family: inherit;
+}
+
+/* Placeholder في المنتصف */
+#chat_pane_youtube__input::placeholder{
+  text-align: center !important;
+  color: #888;
+}
+
+/* =========================
+   Search Button (Same radius as bar)
+   ========================= */
+
+#chat_pane_youtube__submit{
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 46px;
+  height: 30px; /* ⬇️ متناسق مع الحقل */
+
+  border-radius: 18px !important;
+
+  border: none;
+  cursor: pointer;
+
+  background: linear-gradient(135deg,#ff3d3d,#c70000);
+  color: #fff;
+  font-size: 15px;
+
+  box-shadow: 0 4px 12px rgba(199,0,0,.45);
+}
+
+/* =========================
+   YouTube Icon
+   ========================= */
+
+#chat_pane_youtube__icon{
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  color: #ff0000;
+  font-size: 18px;
+  opacity: .9;
+  pointer-events: none;
+}
+
+/* =========================
+   Results – Floating Under Search (No Overlap)
+   ========================= */
+
+#chat_pane_youtube_items{
+  position: absolute !important;
+
+  top: 100% !important;
+  margin-top: 2px !important;
+
+  left: 10px;
+  right: 10px;
+
+  z-index: 999;
+
+  padding: 8px;
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 12px 32px rgba(0,0,0,.18);
+
+  display: flex !important;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 10px;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+/* =========================
+   Result Thumbnails
+   ========================= */
+
+#chat_pane_youtube_items img{
+  flex: 0 0 auto;
+
+  width: 150px;
+  height: 86px;
+  object-fit: cover;
+
+  border-radius: 12px;
+  cursor: pointer;
+
+  box-shadow: 0 4px 10px rgba(0,0,0,.15);
+}
+
+/* =========================
+   Close Button
+   ========================= */
+
+#chat_pane_youtube_items--close{
+  position: sticky;
+  left: 0;
+  top: 0;
+
+  flex: 0 0 auto;
+
+  width: 34px;
+  height: 34px;
+  margin-right: 6px;
+
+  border-radius: 50%;
+  border: none;
+
+  background: #d9534f;
+  color: #fff;
+  cursor: pointer;
+
+  box-shadow: 0 6px 16px rgba(217,83,79,.45);
+}
+
+/* =========================
+   Scrollbar
+   ========================= */
+
+#chat_pane_youtube_items::-webkit-scrollbar{
+  height: 2px;
+}
+#chat_pane_youtube_items::-webkit-scrollbar-thumb{
+  background: rgba(0,0,0,.2);
+  border-radius: 10px;
+}
+
+
+.mic-speakers--item__name {
+  display: none !important;
+}
+
+.emoji_picker.wall{
+  transform: translateY(-45px);
+}
+
+/* Modern Typing Indicator */
+#chat_box__body__is_writing.typing-indicator{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 28px;
+  min-width: 54px;
+  padding: 6px 10px;
+
+  border-radius: 999px;
+  background: rgba(0,0,0,.06);
+  box-shadow: 0 6px 18px rgba(0,0,0,.08);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+#chat_box__body__is_writing.typing-indicator .typing-dot{
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(0,0,0,.45);
+  margin: 0 3px;
+  animation: typingBounce 1.1s infinite ease-in-out;
+}
+
+#chat_box__body__is_writing.typing-indicator .typing-dot:nth-child(2){ animation-delay: .12s; }
+#chat_box__body__is_writing.typing-indicator .typing-dot:nth-child(3){ animation-delay: .24s; }
+
+@keyframes typingBounce{
+  0%, 80%, 100% { transform: translateY(0); opacity: .55; }
+  40%          { transform: translateY(-4px); opacity: 1; }
+}
+
+/* === تصغير + رفع خفيف بدون تغيير المكان === */
+#chat_box__body__is_writing.typing-indicator{
+  height: 22px;        /* أصغر شوي */
+  min-width: 42px;
+  padding: 8px 8px;
+
+  transform: translateY(-45px); /* 👈 رفع بسيط جدًا */
+}
+
+#chat_box__body__is_writing.typing-indicator .typing-dot{
+  width: 5px;
+  height: 5px;
+  margin: 0 2px;
+}
+
+/* حقل البحث */
+.chat_pane__search{
+  background-color: #ffffff !important;   /* خلفية بيضاء */
+  background-image: none !important;      /* إزالة أي خلفية متحركة */
+  direction: rtl !important;              /* RTL */
+  text-align: right !important;
+}
+
+/* إضافة أيقونة عدسة على اليمين */
+.chat_pane__search{
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 10px center !important;
+  background-size: 16px 16px !important;
+  padding-right: 34px !important; /* مساحة للعدسة */
+}
+
+#chat__body__message-reply{
+  transform: translateY(-15px);
+}
+
+#chat__body__wall_pane{
+  width: calc(100% + 25px);
+}
+
+.chat__body__notifications-pane__back > button.btn.btn-success.fa.fa-arrow-left{
+  display: none !important;
+}
+
