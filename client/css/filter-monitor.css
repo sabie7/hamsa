@@ -1,0 +1,199 @@
+/* 
+ * Filter Monitor Style Sheet
+ * Classic Egyptian Chat design aligned with main-ui-color dynamically
+ */
+
+/* Floating Monitor Button at bottom-right */
+.filter-monitor-floating-btn {
+  position: fixed;
+  right: 20px;
+  bottom: 80px;
+  z-index: 1045;
+  border-radius: 4px; /* Matches classic chat button border-radius */
+  padding: 8px 16px;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13.5px;
+  transition: all 0.2s ease-in-out;
+  background-color: #dc3545 !important;
+  color: #fff !important;
+  border: 1px solid #901521 !important;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.filter-monitor-floating-btn .badge {
+  font-size: 11px;
+  padding: 3px 6px;
+  font-weight: bold;
+  background-color: #ffc107 !important;
+  color: #212529 !important;
+  margin-right: 6px;
+  border-radius: 2px;
+}
+
+.filter-monitor-floating-btn:hover {
+  background-color: #c82333 !important;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .filter-monitor-floating-btn {
+    bottom: 85px;
+    right: 15px;
+    padding: 8px 12px;
+  }
+}
+
+/* Side Panel - Sliding from the RIGHT to match Arabic RTL */
+.filter-monitor-side-panel {
+  --sidebar-width: min(340px, 80vw);
+  position: fixed;
+  right: calc(var(--sidebar-width) * -1); /* Hidden offscreen on the right */
+  left: auto;
+  top: 0;
+  bottom: var(--bottom-tabs-height, 0);
+  width: var(--sidebar-width);
+  background-color: #f4f5f7; /* Classic soft background */
+  color: #333333;
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.25);
+  z-index: 1150;
+  display: flex;
+  flex-direction: column;
+  transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-left: 1px solid rgba(0,0,0,0.15);
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .filter-monitor-side-panel {
+    --sidebar-width: 77vw;
+  }
+}
+
+.filter-monitor-side-panel.open {
+  right: 0 !important;
+}
+
+/* Backdrop overlay */
+.filter-monitor-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.4);
+  z-index: 1085;
+  backdrop-filter: blur(1px);
+  transition: opacity 0.2s ease;
+}
+
+/* Panel Header - Elegant Classic Flat Header matching Chat main-ui-color */
+.filter-monitor-side-panel .panel-header {
+  background-color: var(--sidebar-header-bg, var(--main-ui-color, #444444)) !important;
+  padding: 12px 14px;
+  border-bottom: 3px solid #dc3545; /* Red alert indicator line */
+  color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filter-monitor-side-panel .panel-messages {
+  flex-grow: 1;
+  overflow-y: auto;
+  background-color: #eef2f5; /* Clean light gray canvas matching chat feel */
+  padding: 12px;
+}
+
+/* Monitored Message Card - Classic Form with borders & clear text layout */
+.monitor-item-card {
+  background-color: #ffffff;
+  border: 1px solid #ced4da;
+  border-right: 5px solid #dc3545; /* Crimson indicator on the right side for RTL */
+  border-radius: 3px;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  position: relative;
+}
+
+.monitor-item-card:hover {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+.monitor-item-card:last-child {
+  margin-bottom: 0;
+}
+
+/* Metadata & Badges */
+.monitor-item-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #edf1f3;
+}
+
+.monitor-item-badge {
+  font-size: 11px;
+  font-weight: bold;
+  padding: 2px 6px;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.monitor-badge-public {
+  background-color: #20c997;
+  color: #fff;
+}
+
+.monitor-badge-private {
+  background-color: #fd7e14;
+  color: #fff;
+}
+
+.monitor-badge-notification {
+  background-color: #6f42c1;
+  color: #fff;
+}
+
+.monitor-badge-edit {
+  background-color: #17a2b8;
+  color: #fff;
+}
+
+/* Matched Term Pill Tags */
+.monitor-word-pill {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  font-weight: bold;
+  font-size: 11px;
+  padding: 1px 6px;
+  border-radius: 2px;
+  display: inline-block;
+  margin-right: 3px;
+}
+
+/* Message Text Box (Full width original text display) */
+.monitor-item-text {
+  background-color: #ffffff;
+  border: 1px dashed #ced4da;
+  border-radius: 2px;
+  padding: 8px 10px;
+  font-size: 14px;
+  color: #212529;
+  word-break: break-all;
+  line-height: 1.5;
+  font-weight: bold;
+  text-align: right;
+  margin-top: 6px;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.03);
+}
+

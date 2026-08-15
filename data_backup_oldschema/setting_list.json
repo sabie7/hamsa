@@ -1,0 +1,27 @@
+﻿[
+  {
+    "_id": "5fc3b0fbed6d071214a4f009",
+    "site": {
+      "name": "شات تايجر هوست",
+      "title": "شات تايجر هوست | TigerHost",
+      "desc": "شات عربي متكامل",
+      "keywords": "شات,تايجر هوست",
+      "script": "",
+      "bg": "#40404f",
+      "background": "#fffcfa",
+      "buttons": "#438ac7",
+      "allowg": true,
+      "allowreg": true,
+      "msgInterval": 5,
+      "wallLikes": 0,
+      "wallMinutes": 0,
+      "pmLikes": 0,
+      "notLikes": 0,
+      "fileLikes": 0,
+      "protocols": []
+    },
+    "dro3": [],
+    "emo": [],
+    "sico": []
+  }
+]

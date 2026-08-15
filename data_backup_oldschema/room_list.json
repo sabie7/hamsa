@@ -1,0 +1,16 @@
+﻿[
+  {
+    "_id": "local_room_default",
+    "id": "efOiAhhNdL",
+    "topic": "الساحة الرئيسية",
+    "about": "الغرفة الرئيسية",
+    "welcome": "أهلا بك في الساحة الرئيسية",
+    "needpass": false,
+    "pass": "",
+    "max": 200,
+    "pic": "pic.png",
+    "user": "admin",
+    "owner": "admin-001",
+    "delete": false
+  }
+]

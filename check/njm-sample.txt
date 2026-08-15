@@ -1,0 +1,7 @@
+﻿!important;
+  transition: all 0.3s ease-in-out !important;
+}
+
+/* طھط­ط±ظٹظƒ ط§ظ„طµظˆط±ط© ظˆط§ظ„ط¥ط·ط§ط± ظ„ظ„ط£ط¹ط¶ط§ط، ط§ظ„ط°ظٹظ† ظ„ط¯ظٹظ‡ظ… ط¥ط·ط§ط± */
+.chat_pane__user_item__avatar.has-avatar-bg {
+  transform: translateX(10px) !impo

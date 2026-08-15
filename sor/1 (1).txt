@@ -1,0 +1,362 @@
+// مراقبة وحذف عنصر رقم العضوية نهائيًا
+const removeUserHash = () => {
+  document.querySelectorAll('.chat_pane__user_item__status__hash').forEach(el => el.remove());
+};
+
+// حذف فوري عند التحميل
+removeUserHash();
+
+// مراقبة أي تغييرات في الصفحة (لأن العناصر تُضاف ديناميكيًا)
+const observer = new MutationObserver(() => removeUserHash());
+observer.observe(document.body, { childList: true, subtree: true });
+
+
+(function() {
+  'use strict';
+
+  // ✅ التأكيد قبل مسح الرسائل
+  setInterval(() => {
+    const clearBtn = document.querySelector('button.chat__body__message-input__clear.btn.btn-primary.fa.fa-trash');
+    if (clearBtn && !clearBtn.dataset.confirmAttached) {
+      clearBtn.dataset.confirmAttached = 'true';
+      clearBtn.addEventListener('click', function(event) {
+        const confirmDelete = confirm('هل أنت متأكد أنك تريد مسح الحقل؟');
+        if (!confirmDelete) {
+          event.preventDefault();
+          event.stopImmediatePropagation();
+        }
+      }, true);
+    }
+  }, 1000);
+// ✅ تسجيل Service Worker لجعل الموقع يعمل كـ PWA
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('data:application/javascript;base64,dm9pZCAwOw==');
+};
+
+// 🟢 نظام الحماية الدائمة لجلسة المستخدم في تطبيق نجم عمان
+(function() {
+    console.log("🟢 نظام الحماية الذكي بدأ العمل");
+
+    let keepAlive = true;
+    let reconnecting = false;
+    const keepAliveURL = window.location.origin + "/keepalive";
+
+    // ✅ إرسال نبضة خلفية آمنة
+    function sendKeepAlive() {
+        if (!keepAlive || reconnecting) return;
+
+        try {
+            const ok = navigator.sendBeacon(keepAliveURL + "?_=" + Date.now());
+            if (ok) {
+                console.log("💓 Beacon pulse sent (background safe)");
+            } else {
+                fetch(keepAliveURL + "?_=" + Date.now(), { cache: "no-store", mode: "no-cors" });
+            }
+        } catch {
+            fetch(keepAliveURL + "?_=" + Date.now(), { cache: "no-store", mode: "no-cors" });
+        }
+    }
+
+    // 🔁 إرسال نبضة كل 10 ثوانٍ
+    setInterval(sendKeepAlive, 10000);
+
+    // 🎧 عند تشغيل فيديو أو صوت داخل التطبيق
+    document.addEventListener("play", function(e) {
+        if (e.target.tagName === "VIDEO" || e.target.tagName === "AUDIO") {
+            console.log("🎵 تشغيل وسائط — تفعيل نبضات إضافية");
+
+            const mediaPing = setInterval(() => sendKeepAlive(), 8000);
+
+            e.target.addEventListener("pause", () => clearInterval(mediaPing), { once: true });
+            e.target.addEventListener("ended", () => clearInterval(mediaPing), { once: true });
+        }
+    }, true);
+
+    // 📲 عند الانتقال خارج التطبيق ثم العودة
+    document.addEventListener("visibilitychange", function() {
+        if (document.hidden) {
+            console.log("📴 خرج المستخدم — إبقاء الجلسة نشطة بخلفية صامتة");
+            keepAlive = true;
+            navigator.sendBeacon(keepAliveURL + "?hidden=" + Date.now());
+        } else {
+            console.log("📳 عاد المستخدم — إعادة تنشيط الاتصال");
+            reconnecting = true;
+            let steps = 0;
+
+            const simulateActivity = setInterval(() => {
+                steps++;
+                sendKeepAlive();
+
+                if (steps >= 5) {
+                    clearInterval(simulateActivity);
+                    reconnecting = false;
+                    console.log("✅ الجلسة مستمرة — الحماية فعالة");
+                }
+            }, 2500);
+        }
+    });
+
+    // 🚪 عند الإغلاق أو تسجيل الخروج
+    window.addEventListener("beforeunload", function() {
+        keepAlive = false;
+        console.log("🛑 تم إيقاف النبضات — المستخدم خرج يدويًا");
+        navigator.sendBeacon(keepAliveURL + "?logout=" + Date.now());
+    });
+
+    // 💡 نظام احتياطي: نبضة دائمة كل دقيقة
+    setInterval(() => {
+        navigator.sendBeacon(keepAliveURL + "?backup=" + Date.now());
+    }, 60000);
+
+})();
+(function() {
+  function addRefreshButton() {
+    const container = document.querySelector(".chat__body__others-pane__container");
+    if (!container || document.getElementById("refreshButton")) return;
+
+    const btn = document.createElement("div");
+    btn.id = "refreshButton";
+    btn.className = "chat__body__others-pane__container__button form-control success";
+    btn.innerHTML = `<span><span class="fa fa-bolt"></span> تحديث الشات</span>`;
+
+    Object.assign(btn.style, {
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      paddingTop: "6px",
+      paddingBottom: "6px",
+      marginTop: "4px",
+      backgroundColor: "#007bff",
+      color: "#fff",
+      fontWeight: "bold",
+      textAlign: "center",
+      cursor: "pointer",
+      userSelect: "none",
+      boxShadow: "0 -2px 6px rgba(0,0,0,0.15)",
+      borderRadius: "0 10px 0 10px",
+      transition: "background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease"
+    });
+
+    btn.addEventListener("mouseenter", () => {
+      btn.style.backgroundColor = "#0069d9";
+      btn.style.boxShadow = "0px 8px 15px rgba(0, 0, 0, 0.3)";
+      btn.style.transform = "translateY(-3px)";
+    });
+    btn.addEventListener("mouseleave", () => {
+      btn.style.backgroundColor = "#007bff";
+      btn.style.boxShadow = "0 -2px 6px rgba(0,0,0,0.15)";
+      btn.style.transform = "translateY(0)";
+    });
+
+    btn.addEventListener("click", async () => {
+      // منع النقر المتكرر
+      btn.style.pointerEvents = "none";
+      btn.style.opacity = "0.75";
+      btn.innerHTML = `<span><span class="fa fa-spinner fa-spin"></span> جاري التنظيف...</span>`;
+
+      await clearSiteStorageAggressively();
+
+      // ✅ Reload قوي (Cache-busting)
+      const url = new URL(location.href);
+      url.searchParams.set("_r", Date.now().toString());
+      location.replace(url.toString());
+    });
+
+    container.appendChild(btn);
+  }
+
+  async function clearSiteStorageAggressively() {
+    try {
+      // 1) localStorage + sessionStorage
+      try { localStorage.clear(); } catch (e) {}
+      try { sessionStorage.clear(); } catch (e) {}
+
+      // 2) Cache Storage (Service Worker caches)
+      if ("caches" in window) {
+        try {
+          const cacheNames = await caches.keys();
+          await Promise.all(cacheNames.map(name => caches.delete(name)));
+        } catch (e) {}
+      }
+
+      // 3) IndexedDB (قد يكون السبب الأكبر للثقل)
+      // ملاحظة: indexedDB.databases() غير مدعومة في كل المتصفحات
+      if (window.indexedDB) {
+        try {
+          if (indexedDB.databases) {
+            const dbs = await indexedDB.databases();
+            await Promise.all(
+              (dbs || [])
+                .filter(db => db && db.name)
+                .map(db => new Promise(resolve => {
+                  const req = indexedDB.deleteDatabase(db.name);
+                  req.onsuccess = req.onerror = req.onblocked = () => resolve();
+                }))
+            );
+          }
+        } catch (e) {}
+      }
+
+      // 4) إلغاء Service Worker (لو كان ماسك كاش ويبطّئ)
+      if ("serviceWorker" in navigator) {
+        try {
+          const regs = await navigator.serviceWorker.getRegistrations();
+          await Promise.all(regs.map(r => r.unregister()));
+        } catch (e) {}
+      }
+
+      // 5) لو عندك ثقل بسبب DOM/مراقبين:
+      // (اختياري) فك أي Observers كثيفة إن كانت عالمية في سكربتاتك
+      // لا نستطيع هنا نعرفها كلها بدون أسماء، فتركناها.
+
+      console.log("✅ تم تنظيف التخزين والكاش قدر الإمكان");
+    } catch (err) {
+      console.warn("⚠️ حصل خطأ أثناء التنظيف:", err);
+    }
+  }
+
+  // مراقبة ظهور القائمة وإضافة الزر
+  const observer = new MutationObserver(() => addRefreshButton());
+  observer.observe(document.body, { childList: true, subtree: true });
+
+  document.addEventListener("click", () => setTimeout(addRefreshButton, 250));
+  addRefreshButton();
+})();
+
+
+(function () {
+  'use strict';
+
+  // منع تكرار الحقن
+  if (window.__EXTRA_BTNS_MOUNTED__) return;
+  window.__EXTRA_BTNS_MOUNTED__ = true;
+
+  const TARGET_ID = 'tabs';
+  const CONTAINER_CLASS = 'extra-buttons';
+
+  function buildButtonsContainer() {
+    const buttonsContainer = document.createElement('div');
+    buttonsContainer.className = CONTAINER_CLASS;
+
+    const contactBtn = document.createElement('button');
+    contactBtn.className = 'tab-button';
+    contactBtn.type = 'button';
+    contactBtn.innerText = 'تواصـل معنـا';
+
+    const rulesBtn = document.createElement('button');
+    rulesBtn.className = 'tab-button';
+    rulesBtn.type = 'button';
+    rulesBtn.innerText = 'قوانيـن الشـات';
+
+    const aboutBtn = document.createElement('button');
+    aboutBtn.className = 'tab-button';
+    aboutBtn.type = 'button';
+    aboutBtn.innerText = 'مـن نحـن';
+
+    const fancyBtn = document.createElement('button');
+    fancyBtn.className = 'tab-button';
+    fancyBtn.type = 'button';
+    fancyBtn.innerText = 'زخرفـة';
+
+    buttonsContainer.append(contactBtn, rulesBtn, aboutBtn, fancyBtn);
+
+    // زر "تواصل معنا"
+    contactBtn.addEventListener('click', function () {
+      window.open(
+        'https://www.instagram.com/njm.chat?igsh=ZjI2cWs2c2l0MjZ1&utm_source=qr',
+        '_blank'
+      );
+    });
+
+    // زر "قوانين الشات"
+    rulesBtn.addEventListener('click', function () {
+      showModal('قوانين الشات', `
+        <p><b>الاحترام أولاً:</b> تعامل مع الجميع بلطف واحترام، واحذر من الإساءة أو العنصرية.</p>
+        <p><b>المحتوى اللائق:</b> يمنع نشر أي محتوى مسيء أو غير لائق (نصوص، صور، روابط).</p>
+        <p><b>حماية الخصوصية:</b> لا تشارك معلومات شخصية دون إذن.</p>
+        <p><b>الإعلانات ممنوعة:</b> لا تنشر إعلانات ترويجية لمواقع اخرى وتجنب ذكر اسماء المواقع</p>
+        <p><b>الالتزام بالموضوع:</b> حافظ على تركيز المحادثات في المواضيع المناسبة.</p>
+        <p><b>منع التحريض والعنف:</b> يمنع الدعوة للعنف أو التحريض ضد الآخرين.</p>
+        <p><b>الامتثال للإدارة:</b> احترم قرارات الإدارة واطلب المساعدة عند الحاجة.</p>
+        <p><b>حظر المخالفين:</b> سيتم حظر الأعضاء الذين يخالفون القوانين.</p>
+        <p>هدفنا هو توفير بيئة آمنة وممتعة للجميع!</p>
+      `);
+    });
+
+    // زر "من نحن"
+    aboutBtn.addEventListener('click', function () {
+      showModal('من نحن', `
+        في شات نجم عُمان، نحن نعيد تعريف التواصل الإلكتروني بأسلوب يجمع بين الأصالة العمانية وروح الخليج.
+        بفضل رؤية السيد نجم، صاحب الموقع، وبدعم من فريق الإدارة المتميز: رماد، صُـوفيـا، اسكوبار، و هيام،
+        نقدم لكم منصة فريدة تجمع بين الحوارات الهادفة، واللحظات المميزة، والاحترام المتبادل.
+        في شات نجم عُمان، نحن أكثر من مجرد دردشة؛ نحن أسرة واحدة، نبني جسورًا من المحبة والاحترام بين الجميع.
+      `);
+    });
+
+    // زر "زخرفة"
+    fancyBtn.addEventListener('click', function () {
+      window.open('https://www.wmadaat.com/textdecor/en/', '_blank');
+    });
+
+    return buttonsContainer;
+  }
+
+  function showModal(title, content) {
+    // احذف أي نافذة سابقة
+    const old = document.querySelector('.custom-modal');
+    if (old) old.remove();
+
+    const modal = document.createElement('div');
+    modal.className = 'modal custom-modal';
+    modal.innerHTML = `
+      <div class="modal-content">
+        <span class="close" style="cursor:pointer">&times;</span>
+        <h1>${title}</h1>
+        <div class="modal-text" style="color: white !important; direction: rtl; font-size: 14px; line-height: 1.9; padding: 1px; margin-bottom: 17px; text-align: center;">
+          ${content}
+        </div>
+      </div>
+    `;
+    document.body.appendChild(modal);
+
+    // إغلاق
+    modal.querySelector('.close').addEventListener('click', function () {
+      modal.remove();
+    });
+
+    // مهم: لا نستخدم window.onclick (لأنه يكسر أشياء ثانية بالموقع)
+    modal.addEventListener('click', function (e) {
+      if (e.target === modal) modal.remove();
+    });
+
+    modal.style.display = 'block';
+  }
+
+  function insertButtonsIfPossible() {
+    const targetElement = document.getElementById(TARGET_ID);
+    if (!targetElement) return false;
+
+    // إذا انحقنت مسبقاً لا تعيد
+    if (document.querySelector('.' + CONTAINER_CLASS)) return true;
+
+    const buttonsContainer = buildButtonsContainer();
+    targetElement.parentNode.insertBefore(buttonsContainer, targetElement);
+    return true;
+  }
+
+  // 1) حاول فورًا
+  if (insertButtonsIfPossible()) return;
+
+  // 2) إذا ما حصلت #tabs، راقب DOM لين يظهر
+  const obs = new MutationObserver(function () {
+    if (insertButtonsIfPossible()) obs.disconnect();
+  });
+
+  obs.observe(document.documentElement, { childList: true, subtree: true });
+
+  // 3) كمان محاولة إضافية بعد تحميل كامل (احتياط)
+  window.addEventListener('load', function () {
+    insertButtonsIfPossible();
+  });
+})();

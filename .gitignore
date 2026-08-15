@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Environment / secrets — NEVER commit the real .env file
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+launch-out.log
+njm-server.log
+server_*.log
+server_*.txt
+
+# Runtime data & backups
+data/
+backups/
+
+# OS
+Thumbs.db
+.DS_Store

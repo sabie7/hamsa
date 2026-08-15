@@ -1,0 +1,38 @@
+Repository reconstruction mode.
+
+The repository has four areas:
+
+1. scraped_decoded/ (legacy decoded source)
+2. sor/ (recovered source fragments)
+3. deobfuscated_source/ (partial readable deobfuscated utilities)
+4. client/, src/, server.js (runtime application)
+
+Important:
+
+The deobfuscated_source directory is NOT a complete application.
+
+It is only a partial deobfuscated reference.
+
+Do NOT stop after using it.
+
+Your goal is to reconstruct missing functionality inside the runtime application.
+
+Use:
+
+- scraped_decoded/
+- sor/
+- deobfuscated_source/
+
+together.
+
+Never assume any one source is complete.
+
+When a feature is broken:
+
+1. Search all three sources.
+2. Merge available logic.
+3. Implement the missing functionality in the runtime.
+4. Verify the feature.
+5. Continue to the next broken feature.
+
+Do not finish until the runtime application works correctly.

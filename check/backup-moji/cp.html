@@ -1,0 +1,173 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ظ„ظˆط­ط© ط§ظ„طھط­ظƒظ… - طھط§ظٹظ‚ط± ظ‡ظˆط³طھ</title>
+<link rel="stylesheet" href="css/tiger.css">
+<style>
+:root { --bg-secondary: #f5f5f5; --border: #ddd; --radius: 8px; }
+#cp-status { position:fixed;top:0;width:100%;background:var(--bt-primary);padding:8px 16px;display:flex;align-items:center;justify-content:space-between;z-index:1000;height:48px;flex-shrink:0;color:#fff; }
+#cp-sidebar { position:fixed;right:0;top:48px;width:160px;height:calc(100vh - 48px);background:var(--bg-secondary);overflow-y:auto;border-left:1px solid var(--border-color); }
+#cp-sidebar .nav-item { padding:8px 12px;cursor:pointer;font-size:13px;border-bottom:1px solid var(--border-color);display:flex;align-items:center;gap:6px; }
+#cp-sidebar .nav-item:hover,#cp-sidebar .nav-item.active { background:rgba(57,83,110,0.12);color:var(--bt-primary); }
+#cp-main { margin-right:160px;padding:20px;padding-top:60px; }
+.cp-section { display:none; }
+.cp-section.active { display:block; }
+.cp-card { background:#fff;border-radius:var(--radius);padding:16px;margin-bottom:12px;box-shadow:0 2px 8px rgba(0,0,0,0.06); }
+.cp-card h5 { color:var(--bt-primary);margin-bottom:10px;font-size:14px; }
+.cp-table { width:100%;border-collapse:collapse;font-size:13px; }
+.cp-table th,.cp-table td { padding:6px 8px;text-align:right;border-bottom:1px solid var(--border-color); }
+.cp-table th { color:var(--text-muted);font-weight:600; }
+.tag { display:inline-block;padding:2px 6px;background:rgba(57,83,110,0.12);border-radius:3px;font-size:12px;margin:2px; }
+.tag .del { cursor:pointer;margin-right:4px;color:var(--danger); }
+.row { display:flex;gap:8px;flex-wrap:wrap; }
+.col { flex:1;min-width:120px; }
+#cp-pass { width:140px;padding:4px 8px;border:1px solid var(--border-color);border-radius:4px;font-family:var(--font-primary); }
+#cp-main input:not([type=checkbox]):not([type=color]) { width:100%;padding:6px;border:1px solid var(--border-color);border-radius:4px;font-family:var(--font-primary); }
+@media(max-width:768px){ #cp-sidebar { width:100%;height:auto;position:static;border-left:none;display:flex;flex-wrap:wrap; } #cp-main { margin-right:0;padding-top:12px; } .row { flex-direction:column; } }
+</style>
+</head>
+<body>
+
+<div id="cp-status">
+  <div><strong>ًں›، ظ„ظˆط­ط© ط§ظ„طھط­ظƒظ…</strong> <span id="cp-msg" class="text-muted text-sm">âڈ³ ط¬ط§ط±ظٹ ط§ظ„ط§طھطµط§ظ„...</span></div>
+  <div style="display:flex;gap:6px">
+    <input id="cp-pass" type="password" placeholder="ظƒظ„ظ…ط© ط§ظ„ظ…ط±ظˆط±" style="width:140px">
+    <button class="btn btn-primary btn-sm" data-action="cp-connect">ط§طھطµط§ظ„</button>
+    <a href="/" class="btn btn-ghost btn-sm">ط§ظ„ط¹ظˆط¯ط©</a>
+  </div>
+</div>
+
+<nav id="cp-sidebar">
+  <div class="nav-item active" data-tab="sett">âڑ™ ط§ظ„ط¥ط¹ط¯ط§ط¯ط§طھ</div>
+  <div class="nav-item" data-tab="powers">ًں›، ط§ظ„طµظ„ط§ط­ظٹط§طھ</div>
+  <div class="nav-item" data-tab="users">ًں‘¥ ط§ظ„ط£ط¹ط¶ط§ط،</div>
+  <div class="nav-item" data-tab="bans">ًںڑ« ط§ظ„ط­ط¸ط±</div>
+  <div class="nav-item" data-tab="rooms">ًںڑھ ط§ظ„ط؛ط±ظپ</div>
+  <div class="nav-item" data-tab="fltr">ًں”ژ ط§ظ„ظپظ„طھط±</div>
+  <div class="nav-item" data-tab="msgs">âœ‰ ط§ظ„ط±ط³ط§ط¦ظ„</div>
+  <div class="nav-item" data-tab="shrt">âŒ¨ ط§ظ„ط§ط®طھطµط§ط±ط§طھ</div>
+  <div class="nav-item" data-tab="subs">â­گ ط§ظ„ط§ط´طھط±ط§ظƒط§طھ</div>
+  <div class="nav-item" data-tab="fps">ًں“‹ ط§ظ„ط³ط¬ظ„</div>
+  <div class="nav-item" data-tab="hostin">ًں–¥ ط§ظ„ط¥ط¯ط§ط±ط©</div>
+</nav>
+
+<main id="cp-main">
+  <!-- sett -->
+  <div class="cp-section active" id="cp-sett">
+    <div class="cp-card"><h5>ط¥ط¹ط¯ط§ط¯ط§طھ ط§ظ„ظ…ظˆظ‚ط¹</h5>
+      <div class="row">
+        <div class="col"><label>ط§ظ„ط§ط³ظ…</label><input id="s-name"></div>
+        <div class="col"><label>ط§ظ„ط¹ظ†ظˆط§ظ†</label><input id="s-title"></div>
+        <div class="col"><label>ظ„ظˆظ† ط§ظ„ط®ظ„ظپظٹط©</label><input id="s-bg" type="color"></div>
+        <div class="col"><label>ظ„ظˆظ† ط§ظ„ط£ط²ط±ط§ط±</label><input id="s-buttons" type="color"></div>
+        <div class="col"><label>ظ„ظˆظ† ط§ظ„ظ…ط­طھظˆظ‰</label><input id="s-background" type="color"></div>
+      </div>
+      <div class="row mt-2">
+        <div class="col"><label>ط¹ط¯ط¯ ط§ظ„ط¨ط«</label><input id="s-msgst" type="number"></div>
+        <div class="col"><label><input type="checkbox" id="s-allowg"> ط§ظ„ط³ظ…ط§ط­ ظ„ظ„ط²ظˆط§ط±</label></div>
+        <div class="col"><label><input type="checkbox" id="s-allowreg"> ط§ظ„ط³ظ…ط§ط­ ط¨ط§ظ„طھط³ط¬ظٹظ„</label></div>
+      </div>
+      <button class="btn btn-primary btn-sm mt-2" data-action="cp-save-sett">ًں’¾ ط­ظپط¸</button>
+    </div>
+    <div class="cp-card"><h5>ط§ظ„ط¥ظٹظ…ظˆط¬ظٹ ظˆط§ظ„ظ‡ط¯ط§ظٹط§</h5>
+      <div class="row">
+        <div class="col"><label>ط¥ظٹظ…ظˆط¬ظٹ JSON</label><input type="file" id="cp-emo-file" accept=".json"><button class="btn btn-sm btn-info mt-1" data-action="cp-upload-emo">ط±ظپط¹</button></div>
+        <div class="col"><label>ط¯ط±ظˆ3 JSON</label><input type="file" id="cp-dro3-file" accept=".json"><button class="btn btn-sm btn-info mt-1" data-action="cp-upload-dro3">ط±ظپط¹</button></div>
+        <div class="col"><label>ط³ظٹظƒظˆ JSON</label><input type="file" id="cp-sico-file" accept=".json"><button class="btn btn-sm btn-info mt-1" data-action="cp-upload-sico">ط±ظپط¹</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- powers -->
+  <div class="cp-section" id="cp-powers">
+    <div class="cp-card"><h5>ط§ظ„طµظ„ط§ط­ظٹط§طھ</h5><div id="cp-powers-editor"></div></div>
+  </div>
+
+  <!-- users -->
+  <div class="cp-section" id="cp-users">
+    <div class="cp-card"><h5>ط§ظ„ط¨ط­ط« ط¹ظ† ط¹ط¶ظˆ</h5>
+      <div style="display:flex;gap:6px"><input id="cp-user-search" placeholder="ط§ط³ظ… ط§ظ„ظ…ط³طھط®ط¯ظ…"><button class="btn btn-sm btn-primary" data-action="cp-user-search">ط¨ط­ط«</button></div>
+      <div id="cp-user-result" class="mt-2"></div>
+    </div>
+    <div class="cp-card"><h5>ط¬ظ…ظٹط¹ ط§ظ„ط£ط¹ط¶ط§ط،</h5>
+      <div class="cp-table-wrap" style="overflow-x:auto"><table class="cp-table"><thead><tr><th>ط§ظ„ط§ط³ظ…</th><th>ط§ظ„ط±طھط¨ط©</th><th>IP</th><th>ط­ط¸ط±</th><th>ط¥ط¬ط±ط§ط،ط§طھ</th></tr></thead><tbody id="cp-users-table"></tbody></table></div>
+    </div>
+  </div>
+
+  <!-- bans -->
+  <div class="cp-section" id="cp-bans">
+    <div class="cp-card"><h5>ط­ط¸ط± ظ…طھطµظپط­ط§طھ</h5><div id="cp-browser-bans" class="row"></div><button class="btn btn-sm btn-primary mt-1" data-action="cp-save-browser-bans">ط­ظپط¸</button></div>
+    <div class="cp-card"><h5>ط­ط¸ط± ط£ظ†ط¸ظ…ط© طھط´ط؛ظٹظ„</h5><div id="cp-os-bans" class="row"></div><button class="btn btn-sm btn-primary mt-1" data-action="cp-save-os-bans">ط­ظپط¸</button></div>
+    <div class="cp-card"><h5>ط­ط¸ط± ظٹط¯ظˆظٹ</h5>
+      <div class="row"><div class="col"><input id="cp-ban-input" placeholder="IP ط£ظˆ ظ…ط¹ط±ظپ ط§ظ„ط¬ظ‡ط§ط²"></div><div class="col"><input id="cp-ban-reason" placeholder="ط§ظ„ط³ط¨ط¨"></div><div class="col"><button class="btn btn-sm btn-danger" data-action="cp-add-ban">â‍• ط­ط¸ط±</button></div></div>
+      <table class="cp-table mt-2"><thead><tr><th>ط§ظ„ط¬ظ‡ط§ط²/IP</th><th>ط§ظ„طھط§ط±ظٹط®</th><th>ط§ظ„ط³ط¨ط¨</th><th></th></tr></thead><tbody id="cp-ban-table"></tbody></table>
+    </div>
+  </div>
+
+  <!-- rooms -->
+  <div class="cp-section" id="cp-rooms">
+    <div class="cp-card"><h5>ط§ظ„ط؛ط±ظپ</h5>
+      <table class="cp-table"><thead><tr><th>ط§ظ„ط§ط³ظ…</th><th>ط§ظ„ظ…ط§ظ„ظƒ</th><th>ظƒظ„ظ…ط© ط§ظ„ظ…ط±ظˆط±</th><th></th></tr></thead><tbody id="cp-rooms-table"></tbody></table>
+    </div>
+  </div>
+
+  <!-- fltr -->
+  <div class="cp-section" id="cp-fltr">
+    <div class="cp-card"><h5>ط§ظ„ظƒظ„ظ…ط§طھ ط§ظ„ظ…ظپظ„طھط±ط©</h5>
+      <div class="row"><div class="col"><input id="cp-fltr-input" placeholder="ظƒظ„ظ…ط©"></div><div class="col"><button class="btn btn-sm btn-danger" data-action="cp-fltr-block">ط­ط¸ط±</button><button class="btn btn-sm btn-info" data-action="cp-fltr-allow">ط³ظ…ط§ط­</button></div></div>
+      <div id="cp-fltr-list" class="mt-2"></div>
+    </div>
+  </div>
+
+  <!-- msgs -->
+  <div class="cp-section" id="cp-msgs">
+    <div class="cp-card"><h5>ط±ط³ط§ط¦ظ„ ط§ظ„طھط±ط­ظٹط¨ ظˆط§ظ„ظٹظˆظ…ظٹط©</h5>
+      <div class="row"><div class="col"><input id="cp-msg-title" placeholder="ط§ظ„ط¹ظ†ظˆط§ظ†"></div><div class="col"><textarea id="cp-msg-body" rows="2" placeholder="ط§ظ„ظ†طµ"></textarea></div></div>
+      <div class="mt-1"><button class="btn btn-sm btn-primary" data-action="cp-msg-welcome">â‍• طھط±ط­ظٹط¨</button><button class="btn btn-sm btn-info" data-action="cp-msg-daily">â‍• ظٹظˆظ…ظٹط©</button></div>
+      <div id="cp-msg-list" class="mt-2"></div>
+    </div>
+  </div>
+
+  <!-- shrt -->
+  <div class="cp-section" id="cp-shrt">
+    <div class="cp-card"><h5>ط§ظ„ط§ط®طھطµط§ط±ط§طھ</h5>
+      <div class="row"><div class="col"><input id="cp-shrt-name" placeholder="ط§ظ„ط§ط®طھطµط§ط±"></div><div class="col"><input id="cp-shrt-value" placeholder="ط§ظ„ظ‚ظٹظ…ط©"></div><div class="col"><button class="btn btn-sm btn-success" data-action="cp-shrt-add">â‍•</button></div></div>
+      <div id="cp-shrt-list" class="mt-2"></div>
+    </div>
+  </div>
+
+  <!-- subs -->
+  <div class="cp-section" id="cp-subs">
+    <div class="cp-card"><h5>ط§ظ„ط§ط´طھط±ط§ظƒط§طھ</h5>
+      <div class="row"><div class="col"><input id="cp-subs-user" placeholder="ط§ظ„ظ…ط³طھط®ط¯ظ…"></div><div class="col"><input id="cp-subs-power" placeholder="ط§ظ„طµظ„ط§ط­ظٹط©"></div><div class="col"><input id="cp-subs-days" type="number" placeholder="ط§ظ„ظ…ط¯ط© (ط£ظٹط§ظ…)"></div><div class="col"><button class="btn btn-sm btn-success" data-action="cp-subs-add">â‍•</button></div></div>
+      <table class="cp-table mt-2"><thead><tr><th>ط§ظ„ظ…ط³طھط®ط¯ظ…</th><th>ط§ظ„طµظ„ط§ط­ظٹط©</th><th>ط§ظ„طھط§ط±ظٹط®</th><th></th></tr></thead><tbody id="cp-subs-table"></tbody></table>
+    </div>
+  </div>
+
+  <!-- fps -->
+  <div class="cp-section" id="cp-fps">
+    <div class="cp-card"><h5>ط³ط¬ظ„ ط§ظ„ط¯ط®ظˆظ„</h5>
+      <input id="cp-fp-search" placeholder="ط¨ط­ط«...">
+      <table class="cp-table mt-2"><tbody id="cp-fp-list"></tbody></table>
+    </div>
+  </div>
+
+  <!-- hostin -->
+  <div class="cp-section" id="cp-hostin">
+    <div class="cp-card"><h5>ط£ط¯ظˆط§طھ ط§ظ„ط¥ط¯ط§ط±ط©</h5>
+      <button class="btn btn-sm btn-danger" data-action="cp-cmd-delete-fps">ًں—‘ ط­ط°ظپ ط³ط¬ظ„ ط§ظ„ط¯ط®ظˆظ„</button>
+      <button class="btn btn-sm btn-danger" data-action="cp-cmd-delete-actions">ًں—‘ ط­ط°ظپ ط³ط¬ظ„ ط§ظ„ط¥ط¬ط±ط§ط،ط§طھ</button>
+      <button class="btn btn-sm btn-warning" data-action="cp-cmd-reload">ًں”„ طھط­ط¯ظٹط« ط§ظ„طµظپط­ط§طھ</button>
+      <button class="btn btn-sm btn-success" data-action="cp-backup">ًں“¦ ظ†ط³ط® ط§ط­طھظٹط§ط·ظٹ</button>
+      <button class="btn btn-sm btn-info" data-action="cp-restore">ًں“‚ ط§ط³طھط¹ط§ط¯ط©</button>
+    </div>
+  </div>
+</main>
+
+<script src="/socket.io/socket.io.js"></script>
+<script type="module" src="js/cp.js"></script>
+</body>
+</html>
+

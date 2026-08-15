@@ -1,0 +1,24 @@
+# Dependencies & builds
+node_modules/
+client/dist/
+
+# Runtime data & backups
+data/
+backups/
+
+# Legacy/external content not owned by the project
+scraped_decoded/
+sor/
+check/
+launch-out.log
+njm-server*.log
+server_*.log
+server_*.txt
+
+# Minified third-party bundles
+client/js/bootstrap.bundle.min.js
+
+# Environment
+.env
+.env.local
+.env.*.local

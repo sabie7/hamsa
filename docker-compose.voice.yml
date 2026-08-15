@@ -1,0 +1,46 @@
+version: "3.8"
+
+# ─────────────────────────────────────────────────────────────
+#  TURN relay (coturn) for WebRTC voice — hi-master
+# ─────────────────────────────────────────────────────────────
+#  Public STUN only gets a voice call past about 80-90% of NATs.
+#  Behind symmetric NAT (common on mobile networks) you need a
+#  TURN relay. This service is a free, self-hosted coturn that the
+#  chat server advertises to every client via `voice:config`.
+#
+#  Start it with:
+#      docker compose -f docker-compose.voice.yml up -d
+#
+#  Then set these in the chat server's .env (see src/config.js):
+#      TURN_URL=   turn:YOUR_HOST_OR_IP:3478
+#      TURN_USER=  <same user as TURN_USERNAME below>
+#      TURN_PASS=  <same password as TURN_PASSWORD below>
+#
+#  NOTE: `network_mode: host` is used because TURN needs to bind a
+#  wide UDP port range (relay range below) and host networking makes
+#  port publishing trivial. This is Linux-only; on Docker Desktop /
+#  macOS you must publish the range explicitly instead.
+# ─────────────────────────────────────────────────────────────
+services:
+  coturn:
+    image: coturn/coturn:4.6
+    container_name: hi-master-turn
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      TURN_PORT: "3478"          # listening (UDP + TLS/DTLS)
+      TURN_USERNAME: "chat"      # ← must match TURN_USER in the app .env
+      TURN_PASSWORD: "change-me-strong-turn-password"  # ← TURN_PASS
+      TURN_REALM: "turn.example.com"   # change to your public domain/IP
+      TURN_USE_AUTH_SECRET: "false"
+      TURN_NO_AUTH: "false"      # auth required — never run with NO_AUTH in prod
+      TURN_MIN_PORT: "49152"     # relay UDP range (open on firewall!)
+      TURN_MAX_PORT: "65535"
+      TURN_VERBOSE: "true"
+    # Alternative (bridge networking, Linux Docker): uncomment and drop host mode
+    # ports:
+    #   - "3478:3478/udp"
+    #   - "3478:3478/tcp"
+    #   - "3478:3478/tls"
+    #   - "5349:5349/tcp"
+    #   - "49152-65535:49152-65535/udp"

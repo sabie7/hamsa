@@ -1,0 +1,116 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# hi-master — full stack orchestration (Phase 8)
+#
+#   app    : the Node.js chat server (multi-stage Dockerfile, port 3000)
+#   mongo  : MongoDB 7 — durable source of truth for the storage layer
+#   redis  : OPTIONAL — only needed for the @socket.io/redis-adapter when
+#            running multiple app replicas behind a load balancer.
+#   coturn : WebRTC TURN relay (from Phase 4) for voice behind symmetric NAT.
+#
+# Default deploy (Mongo + coturn, single app instance):
+#     docker compose up -d
+#
+# Horizontal scaling with Redis adapter (start the redis service + N replicas):
+#     docker compose --profile redis up -d --scale app=2
+#     (then set REDIS_URL and TURN_URL in the app environment below)
+#
+# Health: the app image HEALTHCHECK polls GET /api/health, which performs a
+# real `ping` against MongoDB and returns 503 when Mongo is unreachable.
+# ─────────────────────────────────────────────────────────────────────────────
+name: hi-master
+
+services:
+  mongo:
+    image: mongo:7
+    container_name: hi-master-mongo
+    restart: unless-stopped
+    volumes:
+      - mongo-data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    ports:
+      - "127.0.0.1:27017:27017"
+
+  # Optional — required only for the socket.io redis-adapter (multi-instance).
+  redis:
+    image: redis:7-alpine
+    container_name: hi-master-redis
+    restart: unless-stopped
+    profiles: ["redis"]
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Free self-hosted TURN relay (Phase 4). `network_mode: host` binds a wide
+  # UDP relay range — Linux only; see docker-compose.voice.yml for the bridge
+  # networking alternative on Docker Desktop/macOS.
+  coturn:
+    image: coturn/coturn:4.6
+    container_name: hi-master-turn
+    restart: unless-stopped
+    network_mode: host
+    environment:
+      TURN_PORT: "3478"
+      TURN_USERNAME: "${TURN_USER:-chat}"
+      TURN_PASSWORD: "${TURN_PASS:-change-me-strong-turn-password}"
+      TURN_REALM: "${TURN_REALM:-turn.example.com}"
+      TURN_USE_AUTH_SECRET: "false"
+      TURN_NO_AUTH: "false"
+      TURN_MIN_PORT: "49152"
+      TURN_MAX_PORT: "65535"
+      TURN_VERBOSE: "true"
+
+  app:
+    build: .
+    container_name: hi-master-app
+    restart: unless-stopped
+    depends_on:
+      mongo:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      PORT: "3000"
+      MONGO_URI: "mongodb://mongo:27017/njmoman"
+      # ⚠ Replace with strong, persistent values in production (.env):
+      JWT_SECRET: "${JWT_SECRET:-change-me-to-a-long-random-secret}"
+      ADMIN_USER: "${ADMIN_USER:-admin}"
+      ADMIN_PASS: "${ADMIN_PASS:-require-ADMIN_PASS}"
+      CORS_ORIGIN: "${CORS_ORIGIN:-*}"
+      MAX_UPLOAD_BYTES: "${MAX_UPLOAD_BYTES:-52428800}"
+      # Voice (must match the coturn service credentials):
+      TURN_URL: "${TURN_URL:-turn:127.0.0.1:3478}"
+      TURN_USER: "${TURN_USER:-chat}"
+      TURN_PASS: "${TURN_PASS:-change-me-strong-turn-password}"
+      STUN_URLS: "${STUN_URLS:-stun:stun.l.google.com:19302,stun:stun1.l.google.com:19302}"
+      MAX_VOICE_SPEAKERS: "${MAX_VOICE_SPEAKERS:-4}"
+      # Backups
+      BACKUP_KEEP: "${BACKUP_KEEP:-20}"
+      BACKUP_INTERVAL_MS: "${BACKUP_INTERVAL_MS:-21600000}"
+      # Structured logging (Phase 8): "json" or "text"
+      LOG_LEVEL: "${LOG_LEVEL:-info}"
+      LOG_FORMAT: "${LOG_FORMAT:-json}"
+      LOG_META: "${LOG_META:-{\"service\":\"hi-master\"}}"
+      # Socket.io redis-adapter (only when the redis profile is enabled)
+      REDIS_URL: "${REDIS_URL:-}"
+    ports:
+      - "3000:3000"
+    volumes:
+      - app-uploads:/app/assets/uploads
+      - app-data:/app/data
+      - app-backups:/app/backups
+
+volumes:
+  mongo-data:
+  redis-data:
+  app-uploads:
+  app-data:
+  app-backups:

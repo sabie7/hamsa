@@ -1,0 +1,51 @@
+{
+  "name": "hi-master",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:unit": "vitest run test/unit",
+    "test:integration": "vitest run test/integration",
+    "start": "node src/modern-server.js",
+    "start:modern": "node src/modern-server.js",
+    "start:new": "node src/app.js",
+    "start:old": "node src/index.js",
+    "build": "vite build",
+    "lint": "eslint src client/js test",
+    "lint:fix": "eslint src client/js test --fix",
+    "format": "prettier --write \"src/**/*.js\" \"client/js/**/*.js\" \"test/**/*.js\"",
+    "format:check": "prettier --check \"src/**/*.js\" \"client/js/**/*.js\" \"test/**/*.js\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.5.2",
+    "@socket.io/redis-adapter": "^8.3.0",
+    "bcryptjs": "^3.0.3",
+    "bootstrap": "^5.3.3",
+    "cors": "^2.8.6",
+    "express": "4.19.2",
+    "express-rate-limit": "^8.6.0",
+    "ffmpeg-static": "^5.3.0",
+    "helmet": "^8.3.0",
+    "mongoose": "^8.3.1",
+    "multer": "1.4.5-lts.1",
+    "redis": "^6.2.0",
+    "sharp": "^0.35.3",
+    "socket.io": "4.7.5"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.8.0",
+    "eslint-config-prettier": "^10.1.8",
+    "mongodb-memory-server": "^11.2.0",
+    "prettier": "^3.9.6",
+    "socket.io-client": "^4.7.5",
+    "vite": "^8.2.0",
+    "vitest": "^4.1.10"
+  }
+}

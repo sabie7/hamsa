@@ -1,0 +1,47 @@
+[
+  {
+    "siteweb": {
+      "allowg": true,
+      "allowreg": true,
+      "name": "test-name",
+      "title": "CP Test",
+      "background": "#40404f",
+      "bg": "#40404f",
+      "buttons": "#f93634",
+      "msgst": "5",
+      "walllikes": {
+        "lengthUserReg": 50,
+        "lengthUserG": 50
+      }
+    },
+    "dro3": [],
+    "emo": [],
+    "sico": [],
+    "shrt": [
+      {
+        "name": "hi",
+        "value": "مرحبا"
+      },
+      {
+        "name": "س1",
+        "value": "السلام عليكم ورحمة الله وبركاته"
+      },
+      {
+        "name": "ph4test",
+        "value": "hello"
+      },
+      {
+        "name": "ph4test",
+        "value": "hello"
+      },
+      {
+        "name": "ph4test",
+        "value": "hello"
+      },
+      {
+        "name": "ph4test",
+        "value": "hello"
+      }
+    ]
+  }
+]

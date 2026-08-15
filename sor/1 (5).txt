@@ -1,0 +1,122 @@
+[PARTIAL RECOVERY — lines 1-120 of 2721. The remainder was permanently deleted and could not be recovered. Content reconstructed verbatim from the last full read before deletion.]
+
+<style>/* تغيير الخط العربي فقط على النصوص */
+html[lang="ar"], body[lang="ar"], *:lang(ar), p, span, h1, h2, h3, h4, h5, h6, a, li, label, input, textarea, select, div {
+    font-family: 'El Messiri', sans-serif !important;
+    font-weight: normal !important;  /* تأكد من أن الخط غير عريض */
+}
+
+/* استبعاد تأثير الخط على الرموز مثل Font Awesome */
+.fa, .icon, .arrow, i, svg, .emoji {
+    font-family: 'FontAwesome', sans-serif !important; /* إعادة تعيين الخط إلى الخط المخصص للأيقونات */
+    font-weight: normal !important;  /* إعادة تعيين الوزن ليكون طبيعي */
+}
+
+/* استبعاد تأثير الخط على الأزرار التي تحتوي على أيقونات */
+button, input[type="button"], input[type="submit"], .btn, .btn-* {
+    font-family: initial !important;
+    font-weight: normal !important;  /* إعادة تعيين الوزن ليكون طبيعي */
+}
+
+
+
+
+#login-btn-holder {
+  display: none;
+}
+
+#royal_login_container .royal_login_item {
+  background: url(https://cityupload.io/2025/11/6455693D-824F-46ED-973D-0A240610A22C.png) 100% 48% / 100% 500% no-repeat !important;
+  width: 15.5rem;
+  max-height: 3.2rem;
+  min-height: 3.2rem;
+}
+
+#royal_login_container .royal_login_item:before {
+  margin-top: -1rem;
+  width: 5.125rem;
+  height: 5.125rem;
+  background: none !important;
+}
+
+#royal_login_container .royal_login_item .royal_login_item__img {
+  width: 2rem;
+  height: 2rem;
+  top: 1rem;
+  left: 2.73rem;
+  border-radius: 50%;
+}
+
+#royal_login_container .royal_login_item .royal_login_item__name {
+  left: 6.5rem;
+  top: 1.85rem;
+}
+
+#royal_login_container .royal_login_item .username__wrapper {
+  background-color: #00000000 !important;
+}
+
+.chat_pane__user_item {
+  height: auto !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  position: relative !important;
+  margin: 0 !important;
+  background-color: #ffffff !important;
+  border-radius: 0.4rem !important;
+  overflow: visible !important;
+}
+
+.username__icon {
+  max-height: 16px !important;
+}
+
+.chat_pane__user_item__avatar {
+  --size: 64px;
+  position: relative !important;
+  width: var(--size) !important;
+  height: var(--size) !important;
+  min-width: var(--size) !important;
+  min-height: var(--size) !important;
+  max-width: var(--size) !important;
+  max-height: var(--size) !important;
+  border-radius: 50% !important;
+  overflow: visible !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  display: block !important;
+  aspect-ratio: 1 / 1 !important;
+  z-index: 5 !important;
+  transition: all 0.3s ease-in-out !important;
+}
+
+/* تحريك الصورة والإطار للأعضاء الذين لديهم إطار */
+.chat_pane__user_item__avatar.has-avatar-bg {
+  transform: translateX(10px) !important; /* ← يمكنك تعديل القيمة هنا */
+  transition: transform 0.3s ease-in-out !important;
+}
+
+.chat_pane__user_item__avatar img:not(.avatar_bg) {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 100% !important;
+  min-height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  object-fit: cover !important;
+  object-position: center center !important;
+  border-radius: 50% !important;
+  margin: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  transform: none !important;
+  z-index: 1 !important;
+}
+
+.chat_pane__user_item__avatar:not(:has(img.avatar_bg)) img {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;

@@ -1,0 +1,624 @@
+etInterval(() => {
+  const revealNamesBtn = document.querySelector('button#user_profile__footer__actions__item--reveal-names.btn.btn-default.fa.fa-search');
+  if (revealNamesBtn && !revealNamesBtn.dataset.confirmAttached) {
+    revealNamesBtn.dataset.confirmAttached = 'true';
+    revealNamesBtn.addEventListener('click', function(event) {
+      // نافذة التنبيه
+      const confirmReveal = confirm('يرجى العلم انه يمنع منعاً باتاً مشاركة معلومات هذا العضو مع اي شخص آخر.\nكشف النكات هي خاصية تنظيمية إدارية فقط لا غير.\nخصوصية الأعضاء أمانة بين يديكم.');
+      if (!confirmReveal) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+      }
+    }, true);
+  }
+}, 1000);
+
+
+(function () {
+  let openOptionsMenu = null;
+  let closeTimeout = null;
+
+  function addOptionsButton(container) {
+    if (container.querySelector("#optionsButton")) return;
+
+    const replyButton = container.querySelector('.public_message__reply');
+    const removeButton = container.querySelector('.public_message__remove');
+
+    const btn = document.createElement("button");
+    btn.id = "optionsButton";
+    btn.className = "options-btn";
+    btn.innerHTML = `<span><span class="fa fa-ellipsis-h"></span></span>`;
+    container.appendChild(btn);
+
+    const optionsMenu = document.createElement("div");
+    optionsMenu.id = "optionsMenu";
+    optionsMenu.className = "options-menu";
+    optionsMenu.style.display = 'none';
+
+    if (replyButton) {
+      optionsMenu.appendChild(replyButton);
+      replyButton.style.display = 'inline-flex';
+      replyButton.addEventListener("click", function(event) {
+        event.stopPropagation();
+        console.log("تم النقر على زر الرد");
+        optionsMenu.style.display = 'none';
+      });
+    }
+
+    if (removeButton) {
+      optionsMenu.appendChild(removeButton);
+      removeButton.style.display = 'inline-flex';
+      removeButton.addEventListener("click", function(event) {
+        event.stopPropagation();
+        console.log("تم النقر على زر الحذف");
+        optionsMenu.style.display = 'none';
+      });
+    }
+
+    container.appendChild(optionsMenu);
+
+    btn.addEventListener("click", function(event) {
+      event.stopPropagation();
+      if (openOptionsMenu && openOptionsMenu !== optionsMenu) {
+        openOptionsMenu.style.display = 'none';
+      }
+      optionsMenu.style.display = optionsMenu.style.display === 'block' ? 'none' : 'block';
+      openOptionsMenu = optionsMenu;
+
+      if (closeTimeout) clearTimeout(closeTimeout);
+    });
+
+    window.addEventListener("click", function(event) {
+      if (!event.target.closest(".public_message__buttons")) {
+        optionsMenu.style.display = 'none';
+        closeTimeout = setTimeout(() => {
+          if (openOptionsMenu) openOptionsMenu.style.display = 'none';
+        }, 5000);
+      }
+    });
+  }
+
+  const observer = new MutationObserver(() => {
+    const messageContainers = document.querySelectorAll(".public_message__buttons");
+    messageContainers.forEach((container) => {
+      addOptionsButton(container);
+    });
+  });
+
+  observer.observe(document.body, { childList: true, subtree: true });
+
+  document.addEventListener("click", () => {
+    setTimeout(() => {
+      const messageContainers = document.querySelectorAll(".public_message__buttons");
+      messageContainers.forEach((container) => {
+        addOptionsButton(container);
+      });
+    }, 700);
+  });
+})();
+
+document.addEventListener(
+  'pointerdown',
+  function (e) {
+    const chatBox = document.getElementById('chat_box');
+    const closeBtn = document.getElementById('chat_box__header__close');
+
+    if (!chatBox || !closeBtn) return;
+
+    // تحقق فعلي أن الشات ظاهر
+    const isVisible =
+      chatBox.offsetWidth ||
+      chatBox.offsetHeight ||
+      chatBox.getClientRects().length;
+
+    if (!isVisible) return;
+
+    // إذا الضغط داخل مربع الشات لا تغلق
+    if (chatBox.contains(e.target)) return;
+
+    // نفّذ نفس إجراء زر الإغلاق
+    closeBtn.click();
+  },
+  true // capture phase (مهم جداً)
+);
+
+
+document.addEventListener('click', function(event) {
+    const welcomeMessages = document.querySelectorAll('.welcome-message');
+
+    welcomeMessages.forEach(msg => {
+        // إذا النقر كان خارج النافذة
+        if (!msg.contains(event.target)) {
+            // البحث عن زر الإغلاق داخل هذه النافذة
+            const closeBtn = msg.querySelector('.close-btn');
+            if (closeBtn) {
+                closeBtn.click(); // محاكاة الضغط على زر الإغلاق
+            } else {
+                msg.remove(); // fallback: إزالة العنصر مباشرة إذا لم يوجد زر
+            }
+        }
+    });
+});
+
+
+
+(function() {
+    const elements = document.querySelectorAll(
+        '.user_profile__body__stats, \
+         .user_profile__body__stats--stars, \
+         .user_profile__body__stats--points, \
+         .user_profile__body__room'
+    );
+
+    function updateVisibility() {
+        const giftWindow = document.querySelector('.gifts_picker__contianer');
+
+        elements.forEach(el => {
+            if (giftWindow && giftWindow.offsetParent !== null) {
+                // نافذة الهدايا ظاهرة → أخفي العناصر مؤقتًا
+                el.style.display = 'none';
+            } else {
+                // نافذة الهدايا مغلقة → أعد العناصر للظهور
+                el.style.display = '';
+            }
+        });
+    }
+
+    // مراقبة أي تغيير في DOM (فتح/إغلاق نافذة الهدايا)
+    const observer = new MutationObserver(updateVisibility);
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    // تفعيل أولي عند تحميل الصفحة
+    updateVisibility();
+})();
+
+
+
+(function () {
+
+    function processMessages() {
+        document.querySelectorAll('.public_message.linen').forEach(msg => {
+
+            if (msg.dataset.processed === 'true') return;
+
+            const text = msg.innerText.trim();
+
+            /* دخول */
+            if (text.includes('دخل')) {
+                msg.dataset.processed = 'true';
+                msg.classList.add('js-join');
+
+                msg.innerHTML = msg.innerHTML.replace(
+                    /هذا المستخدم قد دخل.*/g,
+                    '✨ هذا المستخدم نوّر المكـان'
+                );
+                return;
+            }
+
+            /* خروج */
+            if (text.includes('غادر')) {
+                msg.dataset.processed = 'true';
+                msg.classList.add('js-leave');
+                return;
+            }
+
+            /* انتقال إلى غرفة */
+            if (text.includes('إنتقل إلى')) {
+                msg.dataset.processed = 'true';
+                msg.classList.add('js-move');
+
+                const content = msg.querySelector('.public_message__content');
+                if (content) {
+                    content.innerHTML = '<span>هذا المستخدم إنتقل إلى غرفة اخرى</span>';
+                }
+                return;
+            }
+
+            /* 🚫 طرد */
+            if (text.includes('تم طرده من الدردشة')) {
+                msg.dataset.processed = 'true';
+                msg.classList.add('js-kick');
+
+                const content = msg.querySelector('.public_message__content');
+                if (content) {
+                    content.innerHTML = '<span> تم طرده من الدردشة</span>';
+                }
+                return;
+            }
+
+        });
+    }
+
+    // تشغيل أولي
+    processMessages();
+
+    // مراقبة الرسائل الجديدة
+    const observer = new MutationObserver(processMessages);
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
+
+})();
+
+
+(function() {
+    const emojiPickers = document.querySelectorAll('.emoji_picker');
+
+    emojiPickers.forEach(picker => {
+        const btn = document.querySelector(`[data-target="#${picker.id}"], .emoji-button`); // زر مرتبط أو عام
+        const inputSelector = picker.dataset.input;
+        const input = inputSelector ? document.querySelector(inputSelector) : null;
+
+        if (!btn) return;
+
+        btn.addEventListener('click', e => {
+            e.stopPropagation();
+
+            // ضبط موقع الصندوق
+            const rect = btn.getBoundingClientRect();
+            const screenWidth = window.innerWidth;
+            const screenHeight = window.innerHeight;
+
+            let top = rect.bottom + 5;
+            let left = rect.left;
+
+            if (left + picker.offsetWidth > screenWidth - 10) {
+                left = screenWidth - picker.offsetWidth - 10;
+            }
+            if (top + picker.offsetHeight > screenHeight - 10) {
+                top = rect.top - picker.offsetHeight - 5;
+            }
+
+            picker.style.top = `${top}px`;
+            picker.style.left = `${left}px`;
+            picker.style.display = picker.style.display === 'grid' ? 'none' : 'grid';
+        });
+
+        // عند اختيار أي إيموجي
+        picker.querySelectorAll('.emoji_picker__item').forEach(emoji => {
+            emoji.addEventListener('click', e => {
+                if (input) {
+                    input.value += emoji.dataset.key; // إضافة الإيموجي للـ input
+                }
+                picker.style.display = 'none'; // إغلاق الصندوق
+            });
+        });
+    });
+
+    // إغلاق كل الصناديق عند الضغط خارجها
+    document.addEventListener('click', e => {
+        emojiPickers.forEach(picker => {
+            if (!picker.contains(e.target)) {
+                picker.style.display = 'none';
+            }
+        });
+    });
+})();
+
+
+(function () {
+
+    const applyGifName = () => {
+
+        document.querySelectorAll('.username__wrapper').forEach(el => {
+
+            if (el.dataset.processed) return;
+
+            if (el.textContent.trim() === 'ＮＪＭ') {
+
+                el.dataset.processed = '1';
+
+                // تفريغ العنصر وإنشاء span داخلي
+                el.textContent = '';
+                const inner = document.createElement('span');
+                inner.className = 'username__gif_inner';
+                inner.textContent = 'ＮＪＭ';
+                el.appendChild(inner);
+
+                // إزالة الخلفية الأصلية للقوة
+                el.style.background = 'none';
+                el.style.backgroundColor = 'transparent';
+            }
+
+        });
+
+    };
+
+    applyGifName();
+
+    new MutationObserver(applyGifName).observe(document.body, {
+        childList: true,
+        subtree: true
+    });
+
+})();
+
+
+(function() {
+
+    // إنشاء backdrop واحد فقط
+    let backdrop = document.querySelector('.image-backdrop');
+    if (!backdrop) {
+        backdrop = document.createElement('div');
+        backdrop.className = 'image-backdrop';
+        document.body.appendChild(backdrop);
+    }
+
+    function enablePreview() {
+        document.querySelectorAll(
+            '.public_message__body__image, .private_message__body__image, .wall_post__body--photo-img'
+        ).forEach(img => {
+
+            if (img.dataset.previewAttached) return;
+            img.dataset.previewAttached = 'true';
+
+            const isPrivate = img.classList.contains('private_message__body__image') ||
+                              img.classList.contains('wall_post__body--photo-img');
+
+            let target = img;
+
+            // إذا كانت خاصة أو wall → نضع overlay لمنع فتح الصفحة الجديدة
+            if (isPrivate) {
+                const wrapper = img.parentElement;
+                if (getComputedStyle(wrapper).position === 'static') wrapper.style.position = 'relative';
+
+                const overlay = document.createElement('div');
+                overlay.style.cssText = 'position:absolute;inset:0;cursor:zoom-in;background:rgba(0,0,0,0);z-index:5;';
+                wrapper.appendChild(overlay);
+                target = overlay;
+            }
+
+            target.addEventListener('click', e => {
+                e.preventDefault();
+                e.stopPropagation();
+
+                if (document.querySelector('.image-preview')) return;
+
+                const preview = document.createElement('img');
+                preview.src = img.src;
+                preview.className = 'image-preview';
+                document.body.appendChild(preview);
+
+                requestAnimationFrame(() => {
+                    backdrop.classList.add('active');
+                    preview.classList.add('active');
+                });
+
+                const closePreview = () => {
+                    backdrop.classList.remove('active');
+                    preview.classList.remove('active');
+                    setTimeout(() => preview.remove(), 250);
+                };
+
+                backdrop.onclick = preview.onclick = closePreview;
+            });
+        });
+    }
+
+    enablePreview();
+    new MutationObserver(enablePreview).observe(document.body, { childList: true, subtree: true });
+
+})();
+
+(function() {
+    // جميع الـ textarea التي نريد تعديل placeholder لها
+    const targetIds = [
+        "chat__body__message-input__input",
+        "chat__body__wall_pane__form__input",
+        "chat_box__footer__input"
+    ];
+
+    function changePlaceholders() {
+        targetIds.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) {
+                el.placeholder = "أكتـب رسالتـك يـا حُـلو ... ";
+            }
+        });
+    }
+
+    // نجرب مباشرة أول مرة
+    changePlaceholders();
+
+    // نراقب DOM لأي تغييرات قد تضيف أي من هذه العناصر لاحقًا
+    const observer = new MutationObserver(changePlaceholders);
+    observer.observe(document.body, { childList: true, subtree: true });
+})();
+
+
+(function() {
+    function changeButtonText() {
+        const btn = document.getElementById("chat__body__settings_pane__container__button--send_ad");
+        if (btn && !btn.dataset.textChanged) {
+            const span = btn.querySelector("span");
+            if (span) {
+                // نحافظ على أيقونة fa-send، ونغير فقط النص بعد الأيقونة
+                const icon = span.querySelector(".fa");
+                if (icon) {
+                    // حذف أي نص موجود بعد الأيقونة
+                    const textNode = Array.from(span.childNodes).find(n => n.nodeType === 3);
+                    if (textNode) {
+                        textNode.textContent = " إرسال إعلان";
+                    } else {
+                        span.appendChild(document.createTextNode(" إرسال إعلان"));
+                    }
+                    btn.dataset.textChanged = "true"; // لمنع التكرار
+                }
+            }
+        }
+    }
+
+    // تنفيذ مباشر
+    changeButtonText();
+
+    // مراقبة DOM لأي تغييرات
+    const observer = new MutationObserver(changeButtonText);
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    // ضمان التطبيق إذا تم إعادة إنشاء الزر
+    setInterval(changeButtonText, 500);
+})();
+
+
+(function() {
+    function attachAlert() {
+        const btn = document.getElementById("chat__body__settings_pane__container__button--close-chat");
+        if (btn && !btn.dataset.alertAttached) {
+            btn.addEventListener("click", function() {
+                alert("ربي يحفظك، لا تنسى ترجع لنـا يا حُـلو");
+            });
+            btn.dataset.alertAttached = "true"; // لمنع تكرار الحدث
+        }
+    }
+
+    // تنفيذ مباشر عند التحميل
+    attachAlert();
+
+    // مراقبة DOM لأي تغييرات
+    const observer = new MutationObserver(attachAlert);
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    // ضمان التطبيق إذا تم إعادة إنشاء الزر لاحقًا
+    setInterval(attachAlert, 500);
+})();
+
+
+(function () {
+  document.addEventListener(
+    "click",
+    function (e) {
+      const micItem = e.target.closest(".mic-speakers--item");
+      if (!micItem) return;
+
+      // قبل الصعود فقط
+      if (!micItem.classList.contains("is_speaking")) {
+        const confirmMic = confirm("هل أنت متأكد أنك تريد الصعود للمايك؟");
+
+        if (!confirmMic) {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          e.stopPropagation();
+          return false;
+        }
+      }
+    },
+    true // capture مهم جدًا
+  );
+})();
+
+(function () {
+  let lastClickTime = 0;
+  const DOUBLE_CLICK_DELAY = 350; // بالمللي ثانية
+
+  document.addEventListener("click", function (e) {
+    const micItem = e.target.closest(".mic-speakers--item.is_speaking");
+    if (!micItem) return;
+
+    const now = Date.now();
+
+    if (now - lastClickTime <= DOUBLE_CLICK_DELAY) {
+      // دبل كليك تحقق
+      const leaveBtn = document.getElementById(
+        "mic-speakers--item__modal--leave-mic"
+      );
+
+      if (leaveBtn) {
+        leaveBtn.click();
+      }
+    }
+
+    lastClickTime = now;
+  });
+})();
+
+
+
+(function () {
+
+  const FORM_IDS = [
+    "user_profile__footer__actions__item_group--change-decoration",
+    "user_profile__footer__actions__item_group--control-likes",
+    "user_profile__footer__actions__item_group--wall-points",
+    "user_profile__footer__actions__item_group--change-room",
+    "user_profile__footer__actions__item_group--change-role",
+    "user_profile__footer__actions__item_group--change-subscription-end"
+  ];
+
+  let expanded = false;
+  let currentContainer = null;
+
+  function getExistingForms() {
+    return FORM_IDS
+      .map(id => document.getElementById(id))
+      .filter(Boolean);
+  }
+
+  function forceApply() {
+    const container = document.querySelector(".user_profile__footer__actions");
+
+    // إذا دخلت على بروفايل جديد أو خرجت
+    if (container !== currentContainer) {
+      expanded = false; // إعادة ضبط الزر عند تغيير الصفحة
+      currentContainer = container;
+    }
+
+    if (!container) return;
+
+    const forms = getExistingForms();
+    let span = container.querySelector("#moreActionsSpan");
+
+    // إذا ما فيه أي عنصر → إحذف الزر لو موجود
+    if (forms.length === 0) {
+      if (span) span.remove();
+      return;
+    }
+
+    // إنشاء الزر إذا غير موجود
+    if (!span) {
+      span = document.createElement("span");
+      span.className = "user_profile__footer__actions__item";
+      span.id = "moreActionsSpan";
+
+      const btn = document.createElement("button");
+      btn.id = "forceMoreBtn";
+      btn.className = "btn btn-default fa fa-ellipsis-h";
+      btn.textContent = " إدارة الصلاحيات";
+
+      btn.onclick = () => {
+        expanded = !expanded;
+        applyVisibility();
+        btn.textContent = expanded ? " أخفِ" : " إدارة الصلاحيات";
+      };
+
+      span.appendChild(btn);
+      container.appendChild(span);
+    }
+
+    applyVisibility();
+  }
+
+  function applyVisibility() {
+    const forms = getExistingForms();
+
+    forms.forEach(el => {
+      if (!el.dataset.originalDisplay) {
+        el.dataset.originalDisplay = getComputedStyle(el).display;
+      }
+
+      el.style.display = expanded
+        ? el.dataset.originalDisplay
+        : "none";
+    });
+  }
+
+  const observer = new MutationObserver(forceApply);
+
+  observer.observe(document.documentElement, {
+    childList: true,
+    subtree: true
+  });
+
+  setTimeout(forceApply, 500);
+
+})();

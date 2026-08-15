@@ -1,0 +1,102 @@
+[PARTIAL RECOVERY — lines 1-100 of 1790. The remainder was permanently deleted and could not be recovered. Content reconstructed verbatim from the last full read before deletion.]
+
+(function() {
+    const observer = new MutationObserver(() => {
+        initGiftsFeature();
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    function initGiftsFeature() {
+        const gifts = document.querySelector('.gifts_picker');
+        const giftBtn = document.querySelector('#user_profile__footer__actions__item--gift');
+        const footer = document.querySelector('.user_profile__footer__actions');
+        const modalBody = document.querySelector('.user_profile__body.modal-body');
+
+        if (!gifts || !giftBtn || !footer || !modalBody) return;
+
+     
+        const userDetails = document.querySelector('#user_profile__body__user_details');
+        const userStats = document.querySelector('.user_profile__body__stats');
+        const userTags  = document.querySelector('.user_profile__body__tags');
+        const userCover = document.querySelector('.user_profile__cover-container.position-relative');
+        const userAvatarImg = document.querySelector('.user_profile__body__avatar.cover'); // الأفتار
+
+        if (!userDetails || !userStats || !userTags || !userCover || !userAvatarImg) return;
+
+      
+        if (!modalBody.nextElementSibling || !modalBody.nextElementSibling.classList.contains('gifts_picker')) {
+            modalBody.insertAdjacentElement('afterend', gifts);
+        }
+
+
+        let backBtn = document.querySelector('#gifts_back_btn');
+        if (!backBtn) {
+            backBtn = document.createElement('button');
+            backBtn.id = 'gifts_back_btn';
+            backBtn.textContent = 'رجوع';
+            backBtn.style.cssText = 'margin-bottom:2px;padding:5px 10px;cursor:pointer;';
+            gifts.insertBefore(backBtn, gifts.firstChild);
+
+            backBtn.addEventListener('click', () => {
+                // إخفاء الهدايا
+                gifts.style.display = 'none';
+
+                // إظهار الفوتر كما كان
+                footer.style.visibility = 'visible';
+                footer.style.position = '';
+                footer.style.zIndex = '';
+
+                // التأكيد على ثبات العناصر الأساسية
+                userDetails.style.display = 'block';
+                userStats.style.display = 'flex';
+                userTags.style.display = 'flex';
+                userCover.style.display = 'block';
+
+                // التأكيد على ظهور الأفتار دائمًا
+                userAvatarImg.style.display = 'block';
+                userAvatarImg.style.position = 'relative';
+                userAvatarImg.style.zIndex = '2000';
+            });
+        }
+
+
+        if (!giftBtn.dataset.listener) {
+            giftBtn.addEventListener('click', () => {
+                gifts.style.display = 'block';
+                gifts.style.position = 'relative';
+                gifts.style.width = '100%';
+                gifts.style.height = 'auto';
+                gifts.style.zIndex = '1000';
+
+                // فقط نجعل الفوتر مخفي مؤقتًا
+                footer.style.visibility = 'hidden';
+                footer.style.position = 'absolute';
+                footer.style.zIndex = '-1';
+
+                // التأكيد على ثبات العناصر الأساسية
+                userDetails.style.display = 'block';
+                userStats.style.display = 'flex';
+                userTags.style.display = 'flex';
+                userCover.style.display = 'block';
+
+                // الأفتار يجب أن يظل ظاهرًا فوق كل شيء
+                userAvatarImg.style.display = 'block';
+                userAvatarImg.style.position = 'relative';
+                userAvatarImg.style.zIndex = '2000';
+            });
+            giftBtn.dataset.listener = 'true';
+        }
+    }
+
+    initGiftsFeature();
+})();
+
+
+(function () {
+  let previousValue = null;
+
+  const rolesData = {
+    34: {
+      title: "إدارة عامة",
+      permissions: [

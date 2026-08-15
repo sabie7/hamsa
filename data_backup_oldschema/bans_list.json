@@ -1,0 +1,7 @@
+﻿[
+  {
+    "_id": "5fc3b0fbed6d071214a4f999",
+    "systems": { "system1": true, "system2": true, "system3": true, "system4": true, "system5": true, "system6": true, "system7": true },
+    "browsers": { "browser1": true, "browser2": true, "browser3": true, "browser4": true, "browser5": true, "browser6": true, "browser7": true, "browser8": true, "browser9": true }
+  }
+]

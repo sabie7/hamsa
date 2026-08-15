@@ -1,0 +1,464 @@
+/* ══════════════════════════════════════════════════════════════
+   LEGACY FEATURES — gifts picker, car game, custom modals,
+   games launcher (rebuilt from the recovered sor/scraped sources)
+   ══════════════════════════════════════════════════════════════ */
+
+/* ─── Gifts picker ─── */
+.gifts-picker-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1080;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+.gifts-picker-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+.gifts-picker {
+  width: min(440px, 92vw);
+  max-height: 82vh;
+  background: var(--modal-bg, #2a2a35);
+  border: 1px solid #555;
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.gifts-picker-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: linear-gradient(135deg, #c2185b, #7b1fa2);
+  color: #fff;
+  font-weight: bold;
+  font-size: 15px;
+}
+.gifts-picker-close {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  line-height: 1;
+  border-radius: 6px;
+  width: 28px;
+  height: 28px;
+}
+.gifts-picker-close:hover { background: rgba(255, 255, 255, 0.35); }
+.gifts-picker-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  padding: 14px;
+  overflow-y: auto;
+  background: var(--modal-bg, #2a2a35);
+}
+.gifts-picker-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 4px;
+  border: 1px solid #555;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+.gifts-picker-item:hover {
+  transform: translateY(-3px) scale(1.04);
+  border-color: #e91e63;
+}
+.gifts-picker-icon { font-size: 30px; line-height: 1; }
+.gifts-picker-name { font-size: 12px; font-weight: bold; }
+
+/* ─── Game overlay + stage ─── */
+.game-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1055;
+  display: flex;
+  flex-direction: column;
+  background: rgba(10, 12, 20, 0.96);
+}
+.game-overlay-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: #1c1e2a;
+  border-bottom: 1px solid #333;
+  color: #fff;
+}
+#game-overlay-title {
+  font-weight: bold;
+  font-size: 15px;
+}
+.game-overlay-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.game-overlay-actions button {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border-radius: 6px;
+  width: 30px;
+  height: 30px;
+}
+.game-overlay-actions button:hover { background: rgba(255, 255, 255, 0.25); }
+.game-stage {
+  flex: 1 1 auto;
+  position: relative;
+  overflow: hidden;
+  min-height: 0;
+}
+.game-voice-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 6px 10px;
+  background: #1c1e2a;
+  border-top: 1px solid #333;
+  color: #ddd;
+  font-size: 12px;
+}
+.game-voice-controls button {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border-radius: 6px;
+  width: 30px;
+  height: 30px;
+}
+.game-minimized-indicator {
+  position: fixed;
+  bottom: 70px;
+  right: 14px;
+  z-index: 1056;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #1c1e2a;
+  border: 1px solid #444;
+  border-radius: 20px;
+  padding: 8px 14px;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* ─── Car game canvas ─── */
+.car-game-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  background: #222831;
+}
+
+/* ─── Emoji picker text items ─── */
+.emoji-picker-content .picker-item {
+  width: 38px;
+  height: 38px;
+  font-size: 26px;
+  line-height: 1;
+  border-radius: 8px;
+  user-select: none;
+}
+.emoji-picker-content .picker-item:hover {
+  background: #e9ecef;
+  transform: scale(1.15);
+}
+
+/* ─── Custom modals toolbar + modal ─── */
+.legacy-custom-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 0 2px 4px 2px;
+}
+.legacy-custom-toolbar .tab-button {
+  padding: 3px 10px;
+  font-size: 11px;
+  font-weight: bold;
+  background-color: rgba(255, 255, 255, 0.16);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+  white-space: nowrap;
+}
+.legacy-custom-toolbar .tab-button:hover {
+  background-color: rgba(255, 255, 255, 0.32);
+  transform: translateY(-1px);
+}
+.legacy-custom-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1070;
+  background: rgba(0, 0, 0, 0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.legacy-custom-modal .modal-content {
+  position: relative;
+  width: min(520px, 92vw);
+  max-height: 84vh;
+  overflow-y: auto;
+  background: linear-gradient(160deg, #1f2030, #2d2f45);
+  border: 1px solid #555;
+  border-radius: 12px;
+  padding: 18px 20px 6px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+}
+.legacy-custom-close {
+  position: absolute;
+  top: 8px;
+  left: 14px;
+  color: #fff;
+  font-size: 26px;
+  line-height: 1;
+  opacity: 0.85;
+}
+.legacy-custom-close:hover { opacity: 1; }
+.legacy-custom-title {
+  color: #fff;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  margin: 0 0 14px 0;
+}
+
+/* ─── Games launcher (sidebar) ─── */
+.games-launcher-card {
+  background: linear-gradient(135deg, #1a936f, #0b6e4f);
+  border: 1px solid #555;
+  border-radius: 12px;
+  padding: 16px 12px;
+  color: #fff;
+  text-align: center;
+}
+.games-launcher-icon { font-size: 42px; line-height: 1; margin-bottom: 6px; }
+.games-launcher-title { font-size: 17px; font-weight: bold; }
+.games-launcher-desc { font-size: 12px; opacity: 0.9; margin-bottom: 10px; }
+
+/* ================================================================
+   ALL-DEVICE COMPATIBILITY — consolidated responsive layer.
+   Loaded last (index.css order) so these override base rules.
+   ================================================================ */
+
+#btn-profile-reveal { display: none !important; }
+
+/* ── Tiny phones (<= 400px) ── */
+@media (max-width: 400px) {
+  #chat-form .btn-input-action { padding: 3px; width: 30px; }
+  #chat-form .btn-send { font-size: 12px; padding: 5px 8px; }
+  #chat-form .btn-send i { display: none; }
+  #chat-input { font-size: 14px; }
+  .bottom-tabs-bar { font-size: 11px; }
+  .bottom-tabs-bar .tab-btn { padding: 5px 2px; }
+  .bottom-tabs-bar .tab-btn i { font-size: 14px; }
+  #profile-mid-section .d-flex.justify-content-between { padding: 0 10px !important; }
+  .landing-header { padding: 6px 8px !important; }
+  #header-site-name { font-size: 13px; }
+  .pm-panel { width: 100% !important; }
+  .message-row .message-avatar { width: 26px !important; height: 26px !important; }
+  .btn-profile-action { font-size: 12px !important; }
+  .battle-vs-wrapper { padding: 4px; }
+  .battle-avatar { width: 52px !important; height: 52px !important; }
+}
+
+/* ── Phones (<= 576px) ── */
+@media (max-width: 575.98px) {
+  #chat-shell, #login-overlay { height: var(--chat-viewport-height); }
+  .bottom-tabs-bar { padding: 2px 1px; }
+  .bottom-tabs-bar .tab-btn { font-size: 11.5px; }
+  .tab-btn .badge { font-size: 0.6rem; }
+  #chat-form { gap: 3px; }
+  #chat-form .btn-input-action { padding: 4px; width: 34px; }
+  #emoji-btn img { width: 28px; padding: 4px; }
+  .mic-container { gap: 3px; }
+  .btn-mic { width: 46px; height: 46px; }
+  .voice-top-bar { padding: 3px 6px; }
+  .landing-top-content .site-banner { max-height: 160px; object-fit: cover; }
+  .toast-container { right: 8px; left: 8px; align-items: stretch; }
+  .toast { font-size: 13px; padding: 8px 12px; }
+  .modal-dialog { margin: 8px auto; }
+  #userProfileModal .modal-dialog,
+  #effectsModal .modal-dialog,
+  #reportUserModal .modal-dialog,
+  #roomMusicModal .modal-dialog,
+  #modPermissionsModal .modal-dialog,
+  #createRoomModal .modal-dialog,
+  #passwordModal .modal-dialog,
+  #manageAddonsModal .modal-dialog {
+    max-width: calc(100% - 16px) !important;
+    margin: 8px auto;
+  }
+  .profile-actions-grid { grid-template-columns: repeat(3, 1fr); }
+  .btn-profile-action { height: auto; min-height: 36px; padding: 4px 2px; font-size: 12px; gap: 3px; }
+  .btn-profile-action span { line-height: 1.15; }
+  #profile-actions-grid { max-height: 40vh; overflow-y: auto; }
+  #profile-mid-section { margin-top: -55px; }
+  #profile-mid-section .profile-avatar-frame { transform: scale(0.92); }
+  .message-text { word-break: break-word; }
+  .message-image-preview, .chat-image { max-width: 145px !important; max-height: 140px !important; }
+  .wall-post .card-body { font-size: 14px; }
+  .wall-post .card-body img { max-width: 200px; }
+  .sidebar-container { --sidebar-width: 88vw; }
+  .extra-actions-menu { right: 0; left: auto; }
+  .zajel-ticker-bar, .admin-ads-ticker-bar { font-size: 12px; }
+  .battle-panel-container { bottom: 0; left: 0; right: 0; width: 100%; }
+  .battle-mini-indicator { bottom: 52px; }
+  .gifts-picker { width: 92vw !important; max-height: 80vh; }
+  .gifts-picker-grid { grid-template-columns: repeat(4, 1fr) !important; }
+  .emoji-picker { width: 92vw !important; left: 4px !important; right: 4px !important; }
+}
+
+/* ── Phones & small tablets (<= 768px) ── */
+@media (max-width: 767.98px) {
+  #chat-ui { margin-right: 0 !important; }
+  .landing-header { position: relative; z-index: 20; }
+  .sidebar-overlay { bottom: var(--bottom-tabs-height, 35px); }
+  .sidebar-container { --sidebar-width: 82vw; }
+  #rooms-grid-container .col { flex: 0 0 auto; width: 50%; }
+  .rooms-grid-modal .room-select-card { min-height: 110px; }
+  .landing-middle-area { min-height: 0; }
+  #footer-keywords .badge { font-size: 11px; }
+  .pm-panel { bottom: 0; width: 100%; max-height: 55vh; }
+  .battle-support-actions { gap: 6px; }
+  .bt-gift-btn, .bt-cancel-btn { font-size: 12px; padding: 4px 8px; }
+  .profile-info-bar { flex-wrap: wrap; }
+  #userProfileModal .modal-header { height: 120px !important; min-height: 120px !important; }
+  #userProfileModal #profile-cover { height: 120px !important; }
+  #profile-mid-section .profile-avatar-frame { margin-top: -18px; }
+}
+
+/* ── Tablets (<= 991.98px) ── */
+@media (max-width: 991.98px) {
+  .sidebar-container { --sidebar-width: 74vw; }
+  #chat-ui { margin-right: 0 !important; }
+  .landing-top-content { max-width: 100%; }
+  .landing-middle-area .d-flex.justify-content-between { padding: 0 6px; }
+  .profile-actions-grid { grid-template-columns: repeat(3, 1fr); }
+  .btn-profile-action { min-height: 38px; }
+  #rooms-grid-container .col { flex: 0 0 auto; width: 33.333%; }
+  .room-select-card .card-body h6 { font-size: 14px; }
+}
+
+/* ── Laptops / desktops (>= 992px): restore the classic right-dock ── */
+@media (min-width: 992px) {
+  .profile-actions-grid { grid-template-columns: repeat(4, 1fr); }
+  .btn-profile-action { height: 32px; font-size: 13px; }
+  #chat-ui { margin-right: var(--sidebar-width); }
+  .sidebar-container { --sidebar-width: 340px; --sidebar-width: min(340px, 30vw); }
+  .toast-container { bottom: 20px; right: 20px; }
+  .landing-middle-area { max-width: 760px; margin: 0 auto; width: 100%; }
+  .site-banner-container img { max-height: 200px; object-fit: cover; }
+}
+
+/* ── Wide screens (>= 1400px) ── */
+@media (min-width: 1400px) {
+  .sidebar-container { --sidebar-width: 400px; --sidebar-width: min(400px, 28vw); }
+  #messages-container { font-size: 16px; }
+  .landing-middle-area { max-width: 860px; }
+  .profile-actions-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ── Height-constrained laptops (short screens): keep tabs visible ── */
+@media (max-height: 600px) and (min-width: 768px) {
+  .landing-header { padding: 4px 8px; }
+  #userProfileModal .modal-header { height: 110px !important; min-height: 110px !important; }
+  #userProfileModal #profile-cover { height: 110px !important; }
+  .profile-actions-grid { max-height: 34vh; overflow-y: auto; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   ALL-DEVICE TOUCH / LAYOUT COMPATIBILITY LAYER
+   Goal: buttons click reliably with both mouse (laptop/desktop) and
+   touch (iPhone/Android/touch-laptops), and the chat input bar keeps
+   a clean, correctly shaped layout on small screens.
+   ══════════════════════════════════════════════════════════════ */
+
+/* Legacy iOS 11 / 12: safe-area-inset used the `constant()` keyword
+   before `env()` existed. Without this the bottom input bar rides up
+   under the home indicator on older iPhones. */
+@supports (padding: constant(safe-area-inset-bottom)) {
+  #chat-ui,
+  .chat-input-container {
+    padding-bottom: constant(safe-area-inset-bottom);
+  }
+  #chat-ui {
+    padding-left: constant(safe-area-inset-left);
+    padding-right: constant(safe-area-inset-right);
+  }
+}
+
+/* Touch devices (iPhones, tablets, touch laptops): larger, aligned,
+   correctly shaped tap targets. The default action buttons are only
+   32px — below the comfortable 40-44px touch target. */
+@media (hover: none), (pointer: coarse) {
+  button, a, input, .btn, [role="button"] {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* input-bar action buttons: grow to a finger-friendly size and
+     keep square corners consistent across iOS/Android */
+  .btn-input-action {
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px;
+    min-height: 40px;
+    padding: 0 !important;
+  }
+
+  .extra-actions-menu .btn-input-action {
+    width: 42px !important;
+    height: 42px !important;
+  }
+
+  .btn-send {
+    min-height: 40px;
+    height: 40px;
+    padding: 0 12px;
+  }
+
+  .chat-input-field,
+  #chat-input {
+    height: 40px !important;
+    min-height: 40px !important;
+  }
+
+  .chat-input-container {
+    padding-top: 6px;
+    padding-bottom: max(6px, env(safe-area-inset-bottom));
+  }
+
+  /* pressed feedback because :hover never fires on touch */
+  .btn-input-action:active, .btn-send:active { opacity: 0.7; }
+}
+
+/* Emoji picker / extra-actions must never overflow a very narrow phone */
+@media (max-width: 380px) {
+  .extra-actions-menu {
+    left: auto !important;
+    right: 0;
+    max-width: calc(100vw - 16px);
+    flex-wrap: wrap;
+  }
+  .extra-actions-menu .btn-input-action { width: 40px !important; height: 40px !important; }
+}

@@ -1,0 +1,122 @@
+[PARTIAL RECOVERY — lines 1-120 of 2793. The remainder was permanently deleted and could not be recovered. Content reconstructed verbatim from the last full read before deletion.]
+
+
+      // ✅ Bind arrows مرة واحدة فقط على مستوى الصفحة
+      if (!document.documentElement.dataset.carKeyBound) {
+        document.documentElement.dataset.carKeyBound = "true";
+        document.addEventListener(
+          "keydown",
+          (e) => {
+            if (e.key === "ArrowLeft") moveDir = -1;
+            if (e.key === "ArrowRight") moveDir = 1;
+          },
+          { passive: true }
+        );
+
+        document.addEventListener(
+          "keyup",
+          (e) => {
+            if (e.key === "ArrowLeft" || e.key === "ArrowRight") moveDir = 0;
+          },
+          { passive: true }
+        );
+      }
+
+      btn.onclick = () => {
+        w.style.display = "block";
+        reset();
+      };
+      restartBtn.onclick = reset;
+      closeBtn.onclick = () => {
+        over = true;
+        w.style.display = "none";
+      };
+    }
+
+    addCarDodgerButton();
+    observeBody(addCarDodgerButton);
+  })();
+
+  /* ==========================
+   * 6) Close games pane safely (NO polling)
+   * ========================== */
+  (function () {
+    function closeGamesPaneSafely() {
+      const closeBtn = $(".btn.chat_pane__header__close");
+      if (closeBtn) closeBtn.click();
+    }
+
+    function isGameButton(btn) {
+      const t = btn && btn.textContent ? btn.textContent : "";
+      return t.includes("Car Dodger") || t.includes("Flappy") || t.includes("الثعبـان") || t.includes("الذاكرة");
+    }
+
+    function bindDelegatedOnce() {
+      const container = getOthersContainer();
+      if (!container || container.dataset.safeCloseDelegated) return;
+      container.dataset.safeCloseDelegated = "true";
+
+      // مستمع واحد فقط بدل setInterval + ربط متكرر
+      container.addEventListener(
+        "click",
+        (e) => {
+          const btn = e.target.closest(".chat__body__others-pane__container__button");
+          if (!btn || !isGameButton(btn)) return;
+
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => closeGamesPaneSafely());
+          });
+        },
+        false
+      );
+    }
+
+    bindDelegatedOnce();
+    observeBody(bindDelegatedOnce);
+  })();
+})();
+
+
+
+(function () {
+  const hideGuest = () => {
+    const guest = document.querySelector('a.nav-link[href="#guest"]');
+    if (guest) {
+      const li = guest.closest('li');
+      if (li) li.remove();
+    }
+  };
+
+  hideGuest();
+
+  const observer = new MutationObserver(hideGuest);
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+})();
+
+
+(function () {
+  const registerForm = document.getElementById('register-form');
+  const memberTab = document.getElementById('member');
+
+  if (!registerForm || !memberTab) return;
+
+  if (document.querySelectorAll('#howRegisterBtn').length) return;
+
+  function createBtn() {
+    const btn = document.createElement('button');
+    btn.id = 'howRegisterBtn';
+    btn.type = 'button';
+    btn.textContent = 'كيف أسجل عضوية؟';
+
+    // إزالة أي تأثير خارجي بالـ !important
+    btn.style.cssText = `
+      display: block !important;
+      width: 99% !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+      margin-bottom: 8px !important;
+      padding: 6px 10px !important;
+      font-size: 12px !important;

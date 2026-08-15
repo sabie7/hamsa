@@ -1,0 +1,26 @@
+{
+  "name": "شات نجم عمان",
+  "short_name": "نجم عمان",
+  "description": "شات نجم عمان: وجهتك الأولى للدردشة الخليجية والعربية. تواصل مع أصدقاء جدد من عمان والسعودية وكافة الدول في بيئة آمنة وسريعة.",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#3b3a3a",
+  "theme_color": "#794e4e",
+  "icons": [
+    {
+      "src": "/uploads/site/favicon-1783610496473-23178218.jpeg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any"
+    },
+    {
+      "src": "/uploads/site/banner-1783610496467-956197802.jpeg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any"
+    }
+  ]
+}

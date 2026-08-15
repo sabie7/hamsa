@@ -1,0 +1,13 @@
+/* ══════════════════════════════════════════════════════════════
+   INDEX — consolidated stylesheet entry point.
+   Order matters: tokens → theme (dark mode) → layout → components
+   → legacy compatibility layer. njm.css and modern.css are legacy
+   files not referenced by index.html/cp.html and are intentionally
+   excluded (dead code).
+   ══════════════════════════════════════════════════════════════ */
+
+@import url('./tokens.css?v=4');
+@import url('./theme.css?v=4');
+@import url('./layout.css?v=4');
+@import url('./components.css?v=4');
+@import url('./legacy-features.css?v=4');
